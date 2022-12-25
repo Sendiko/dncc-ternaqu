@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav"
+    app:startDestination="@id/splashScreenFragment">
+    <fragment
+        android:id="@+id/splashScreenFragment"
+        android:name="com.sendiko.ternaqu.ui.splashscreen.SplashScreenFragment"
+        android:label="fragment_splash_screen"
+        tools:layout="@layout/fragment_splash_screen" >
+        <action
+            android:id="@+id/action_splashScreenFragment2_to_walkthroughFragment"
+            app:destination="@id/walkthroughFragment"
+            app:popUpTo="@id/walkthroughFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/walkthroughFragment"
+        android:name="com.sendiko.ternaqu.ui.walkthrough.WalkthroughFragment"
+        android:label="fragment_walkthrough"
+        tools:layout="@layout/fragment_walkthrough" />
+</navigation>

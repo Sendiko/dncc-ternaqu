@@ -37,9 +37,9 @@
 
     <style name="TernaQu.SplashscreenTheme" parent="Theme.Material3.Light.NoActionBar">
 
-        <item name="android:navigationBarColor">@color/whiteBg</item>
+        <item name="android:navigationBarColor">@color/whiteBgAlt</item>
         <item name="android:windowLightNavigationBar" tools:ignore="NewApi">true</item>
-        <item name="android:statusBarColor">@color/whiteBg</item>
+        <item name="android:statusBarColor">@color/whiteBgAlt</item>
         <item name="android:windowLightStatusBar" tools:ignore="NewApi">true</item>
 
     </style>
