@@ -71,5 +71,6 @@
     <color name="whiteBgAlt">#FBFAFF</color>
     <color name="textHintColor">#BCBCBC</color>
     <color name="green">#56BD3D</color>
+    <color name="fadeBlue">#EAEFF5</color>
 
 </resources>
