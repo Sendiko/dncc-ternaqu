@@ -1,4 +1,4 @@
-package com.sendiko.ternaqu.ui.fragments
+package com.sendiko.ternaqu.ui.splashscreen
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
