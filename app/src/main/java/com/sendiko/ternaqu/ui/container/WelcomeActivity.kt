@@ -3,15 +3,15 @@ package com.sendiko.ternaqu.ui.container
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.sendiko.ternaqu.R
-import com.sendiko.ternaqu.databinding.ActivityMainBinding
+import com.sendiko.ternaqu.databinding.ActivityWelcomeBinding
 
-class MainActivity : AppCompatActivity() {
+class WelcomeActivity : AppCompatActivity() {
 
-    private lateinit var binding : ActivityMainBinding
+    private lateinit var binding : ActivityWelcomeBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityWelcomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
     }
 }
