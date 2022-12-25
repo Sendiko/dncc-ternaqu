@@ -1,8 +1,8 @@
-package com.sendiko.ternaqu
+package com.sendiko.ternaqu.ui.container
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.sendiko.ternaqu.ui.main.MainFragment
+import com.sendiko.ternaqu.R
 
 class MainActivity : AppCompatActivity() {
 

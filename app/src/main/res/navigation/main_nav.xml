@@ -6,7 +6,7 @@
     app:startDestination="@id/splashScreenFragment2">
     <fragment
         android:id="@+id/splashScreenFragment2"
-        android:name="com.sendiko.ternaqu.ui.fragments.SplashScreenFragment"
+        android:name="com.sendiko.ternaqu.ui.splashscreen.SplashScreenFragment"
         android:label="fragment_splash_screen"
         tools:layout="@layout/fragment_splash_screen" />
 </navigation>
