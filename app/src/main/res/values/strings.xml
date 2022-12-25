@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">TernaQu</string>
+    <string name="halo">Halo!</string>
+    <string name="welcomeText">Selamat datang di</string>
+    <string name="loremipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua </string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
 </resources>
