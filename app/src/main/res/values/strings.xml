@@ -5,4 +5,17 @@
     <string name="loremipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua </string>
     <string name="login">Login</string>
     <string name="register">Register</string>
+    <string name="welcome_text_register">Buat akun untuk melanjutkan</string>
+    <string name="nama">Nama</string>
+    <string name="full_name">Nama lengkap</string>
+    <string name="email">Email</string>
+    <string name="your_email">Alamat email anda</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Konfirmasi Password</string>
+    <string name="privacy_policy">Dengan membuat akun anda setuju dengan persyaratan layanan kami</string>
+    <string name="go_to_login">Sudah punya akun? <b>Login</b></string>
+    <string name="forgot_password">Lupa password?</string>
+    <string name="login_greeting">Selamat datang kembali!</string>
+    <string name="login_greeting2">Login untuk melanjutkan</string>
+    <string name="go_to_register">Belum punya akun? <b>Register</b></string>
 </resources>
