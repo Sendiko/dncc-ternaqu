@@ -44,8 +44,7 @@ class RegisterFragment : Fragment() {
             val passwordConfirmation = binding.inputConfirmPassword.text.toString()
             when(validate(name, email, password, passwordConfirmation)){
                 true -> Toast.makeText(context, "valid", Toast.LENGTH_SHORT).show()
-                else -> {
-                    Toast.makeText(context, "not valid", Toast.LENGTH_SHORT).show()}
+                else -> {}
             }
         }
 
