@@ -57,7 +57,7 @@ class RegisterFragment : Fragment() {
         password: String,
         passwordConfirmation: String
     ): Boolean {
-        var valid = false
+        val valid: Boolean
         when {
             name.isEmpty() -> {
                 valid = false
