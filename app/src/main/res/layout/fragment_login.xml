@@ -116,8 +116,9 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_medium"
                         android:hint="@string/your_email"
-                        android:inputType="textPersonName"
-                        android:textColor="@color/textHintColor" />
+                        android:inputType="textEmailAddress"
+                        android:textColorHint="@color/textHintColor"
+                        android:textColor="@color/textColor" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
@@ -156,7 +157,8 @@
                         android:fontFamily="@font/poppins_medium"
                         android:hint="@string/password"
                         android:inputType="textPassword"
-                        android:textColor="@color/textHintColor" />
+                        android:textColorHint="@color/textHintColor"
+                        android:textColor="@color/textColor"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView

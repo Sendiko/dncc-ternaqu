@@ -4,11 +4,15 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.preferencesDataStore
 import androidx.navigation.NavHostController
 import androidx.navigation.fragment.NavHostFragment
 import com.sendiko.ternaqu.R
 import com.sendiko.ternaqu.databinding.ActivityAuthBinding
 
+val Context.dataStore : DataStore<Preferences> by preferencesDataStore(name = "auth_pref")
 class AuthActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityAuthBinding
