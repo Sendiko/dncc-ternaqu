@@ -17,6 +17,7 @@ import com.sendiko.ternaqu.repository.AuthPreferences
 import com.sendiko.ternaqu.repository.AuthViewModel
 import com.sendiko.ternaqu.repository.AuthViewModelFactory
 import com.sendiko.ternaqu.ui.auth.dataStore
+import com.sendiko.ternaqu.ui.container.MainActivity
 import com.sendiko.ternaqu.ui.container.WelcomeActivity
 
 private const val TAG = "LoginFragment"
@@ -56,7 +57,10 @@ class LoginFragment : Fragment() {
             val email = binding.inputEmail.text.toString()
             val password = binding.inputPassword.text.toString()
             when (validation(email, password)) {
-                true -> authViewModel.setLoginState(true)
+                true -> {
+                    authViewModel.setLoginState(true)
+                    requireContext().startActivity(Intent(context, MainActivity::class.java))
+                }
                 else -> {}
             }
         }
