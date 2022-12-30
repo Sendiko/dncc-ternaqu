@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sendiko.ternaqu.R
 import com.sendiko.ternaqu.databinding.FragmentDashboardBinding
+import com.sendiko.ternaqu.repository.ProductRepository
+import com.sendiko.ternaqu.repository.RecipeRepository
 
 class DashboardFragment : Fragment() {
 
@@ -24,8 +26,17 @@ class DashboardFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        binding.rvResep.layoutManager = layoutManager
+        val horizontalLayoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        binding.rvResep.apply {
+            layoutManager = horizontalLayoutManager
+            adapter = RecipeAdapter(RecipeRepository().getRecipeList(), requireContext())
+        }
+
+        val alsoHorizontalLayoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        binding.rvProducts.apply {
+            layoutManager = alsoHorizontalLayoutManager
+            adapter = ProductAdapter(ProductRepository().getProduct(), requireContext())
+        }
         
         
     }
