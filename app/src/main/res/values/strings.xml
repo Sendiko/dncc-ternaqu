@@ -26,4 +26,9 @@
     <string name="see_more">Lihat semua</string>
     <string name="resep_header">Resep pangan pilihan</string>
     <string name="resep_sub_header">Resep pangan pilihan para ahli</string>
+    <string name="rekomendasi_header">Rekomendasi merek pangan</string>
+    <string name="rekomendadi_sub_header">Merek pangan terjamin</string>
+    <string name="konsul_header">Konsultasi ahli ternak</string>
+    <string name="konsul_sub_header">Konsultasi dengan ahli ternak untuk \npembahasan yang lebih lanjut</string>
+    <string name="konsul_now">Konsultasi sekarang</string>
 </resources>
