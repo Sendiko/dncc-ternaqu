@@ -8,23 +8,38 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
+import com.google.gson.annotations.SerializedName
 import com.sendiko.ternaqu.R
 import com.sendiko.ternaqu.databinding.FragmentLoginBinding
-import com.sendiko.ternaqu.repository.AuthPreferences
+import com.sendiko.ternaqu.network.request.LoginRequest
+import com.sendiko.ternaqu.repository.auth.AuthPreferences
 import com.sendiko.ternaqu.repository.AuthViewModel
 import com.sendiko.ternaqu.repository.AuthViewModelFactory
+import com.sendiko.ternaqu.repository.ViewModelFactory
+import com.sendiko.ternaqu.repository.user.UserViewModel
 import com.sendiko.ternaqu.ui.auth.dataStore
 import com.sendiko.ternaqu.ui.container.MainActivity
 import com.sendiko.ternaqu.ui.container.WelcomeActivity
+import com.sendiko.ternaqu.ui.loading.LoadingDialogFragment
 
 private const val TAG = "LoginFragment"
 
 class LoginFragment : Fragment() {
 
     private lateinit var binding: FragmentLoginBinding
+
+    private fun obtainViewModel(activity: FragmentActivity) : UserViewModel {
+        val factory = ViewModelFactory.getInstance(activity.application)
+        return ViewModelProvider(this, factory)[UserViewModel::class.java]
+    }
+
+    private val userViewModel by lazy {
+        obtainViewModel(requireNotNull(this.activity))
+    }
 
     private val pref by lazy {
         AuthPreferences.getInstance(requireNotNull(this.context).dataStore)
@@ -53,18 +68,58 @@ class LoginFragment : Fragment() {
             findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
         }
 
+        authViewModel.getTokenAccess().observe(viewLifecycleOwner){
+            Log.d(TAG, "onViewCreated: $it")
+        }
+
         binding.buttonLogin.setOnClickListener {
             val email = binding.inputEmail.text.toString()
             val password = binding.inputPassword.text.toString()
-            when (validation(email, password)) {
-                true -> {
-                    authViewModel.setLoginState(true)
-                    requireContext().startActivity(Intent(context, MainActivity::class.java))
+            when  {
+                validation(email, password) -> {
+                    userViewModel.postLogin(LoginRequest(
+                        email, password
+                    )).observe(viewLifecycleOwner){
+                        when{
+                            it != null -> {
+                                authViewModel.saveTokenAccess(it)
+                                authViewModel.setLoginState(true)
+                                startActivity(Intent(requireContext(), MainActivity::class.java))
+                            }
+                        }
+                    }
                 }
-                else -> {}
             }
         }
 
+        userViewModel.isFailed.observe(viewLifecycleOwner){
+            when{
+                it.isFailed -> showSnackbar(it.failedMessage)
+            }
+        }
+
+        userViewModel.isLoading.observe(viewLifecycleOwner){
+            showLoading(it)
+        }
+
+    }
+
+    private fun showSnackbar(message : String){
+        Snackbar.make(requireView(), message, Snackbar.LENGTH_LONG).show()
+    }
+
+    private fun showLoading(isLoading : Boolean){
+        var loadingDialogFragment = LoadingDialogFragment()
+        when {
+            isLoading -> {
+                loadingDialogFragment.show(parentFragmentManager)
+            }
+            else -> {
+                loadingDialogFragment =
+                    parentFragmentManager.findFragmentByTag(LoadingDialogFragment().FRAGMENT_TAG) as LoadingDialogFragment
+                loadingDialogFragment.dismiss()
+            }
+        }
     }
 
     private fun validation(
