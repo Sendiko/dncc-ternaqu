@@ -15,7 +15,7 @@ class LoadingDialogFragment : DialogFragment() {
     private fun newInstance() = LoadingDialogFragment()
     val FRAGMENT_TAG = "loading"
 
-    fun show(supportFragmentManager : FragmentManager) : LoadingDialogFragment {
+    fun show(supportFragmentManager: FragmentManager): LoadingDialogFragment {
         val dialog = newInstance()
         dialog.isCancelable = true
         dialog.show(supportFragmentManager, FRAGMENT_TAG)
@@ -27,7 +27,11 @@ class LoadingDialogFragment : DialogFragment() {
         savedInstanceState: Bundle?
     ): View? {
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        return requireActivity().layoutInflater.inflate(R.layout.fragment_loading_dialog, container, false)
+        return requireActivity().layoutInflater.inflate(
+            R.layout.fragment_loading_dialog,
+            container,
+            false
+        )
     }
 
     override fun onStart() {

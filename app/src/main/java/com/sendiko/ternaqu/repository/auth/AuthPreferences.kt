@@ -13,15 +13,16 @@ class AuthPreferences private constructor(private val dataStore: DataStore<Prefe
     private val loginState = booleanPreferencesKey(name = "login_state")
     private val tokenAccess = stringPreferencesKey(name = "token_access")
 
-    fun getTokenAccess() : Flow<String> {
+    fun getTokenAccess(): Flow<String> {
         return dataStore.data.map { key ->
-            key[tokenAccess]?:""
+            key[tokenAccess] ?: ""
         }
     }
 
-    suspend fun saveTokenAccess(token : String){
+    suspend fun saveTokenAccess(token: String) {
         dataStore.edit { key ->
             key[tokenAccess] = token
+
         }
     }
 
@@ -39,10 +40,10 @@ class AuthPreferences private constructor(private val dataStore: DataStore<Prefe
 
     companion object {
         @Volatile
-        private var INSTANCE : AuthPreferences?= null
+        private var INSTANCE: AuthPreferences? = null
 
-        fun getInstance(dataStore: DataStore<Preferences>) : AuthPreferences {
-            return INSTANCE ?: synchronized(this){
+        fun getInstance(dataStore: DataStore<Preferences>): AuthPreferences {
+            return INSTANCE ?: synchronized(this) {
                 val instance = AuthPreferences(dataStore)
                 INSTANCE = instance
                 instance
