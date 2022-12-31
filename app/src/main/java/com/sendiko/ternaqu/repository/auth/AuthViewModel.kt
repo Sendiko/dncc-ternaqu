@@ -4,23 +4,23 @@ import androidx.lifecycle.*
 import com.sendiko.ternaqu.repository.auth.AuthPreferences
 import kotlinx.coroutines.launch
 
-class AuthViewModel(private val auth : AuthPreferences) : ViewModel() {
+class AuthViewModel(private val auth: AuthPreferences) : ViewModel() {
 
-    fun getTokenAccess() : LiveData<String> {
+    fun getTokenAccess(): LiveData<String> {
         return auth.getTokenAccess().asLiveData()
     }
 
-    fun saveTokenAccess(token : String){
+    fun saveTokenAccess(token: String) {
         viewModelScope.launch {
             auth.saveTokenAccess(token)
         }
     }
 
-    fun getLoginState() : LiveData<Boolean> {
+    fun getLoginState(): LiveData<Boolean> {
         return auth.getLoginState().asLiveData()
     }
 
-    fun setLoginState(isLoggedIn : Boolean){
+    fun setLoginState(isLoggedIn: Boolean) {
         viewModelScope.launch {
             auth.setLoginState(isLoggedIn)
         }
@@ -28,9 +28,10 @@ class AuthViewModel(private val auth : AuthPreferences) : ViewModel() {
 
 }
 
-class AuthViewModelFactory(private val auth : AuthPreferences) : ViewModelProvider.NewInstanceFactory(){
+class AuthViewModelFactory(private val auth: AuthPreferences) :
+    ViewModelProvider.NewInstanceFactory() {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        when{
+        when {
             modelClass.isAssignableFrom(AuthViewModel::class.java) -> return AuthViewModel(auth) as T
             else -> throw IllegalArgumentException("Unknown model class : " + modelClass.name)
         }

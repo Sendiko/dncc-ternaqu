@@ -15,6 +15,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 private const val TAG = "UserViewModel"
+
 class UserViewModel(app: Application) : AndroidViewModel(app) {
 
     private val repo = UserRepository(app)
@@ -23,7 +24,7 @@ class UserViewModel(app: Application) : AndroidViewModel(app) {
     val isLoading: LiveData<Boolean> = _isLoading
 
     private val _isFailed = MutableLiveData<FailedMessage>()
-    val isFailed : LiveData<FailedMessage> = _isFailed
+    val isFailed: LiveData<FailedMessage> = _isFailed
 
     fun postRegister(
         registerRequest: RegisterRequest
@@ -32,15 +33,15 @@ class UserViewModel(app: Application) : AndroidViewModel(app) {
         val isSuccess = MutableLiveData<Boolean>()
         val request = repo.postRegister(registerRequest)
         request.enqueue(
-            object : Callback<RegisterResponse>{
+            object : Callback<RegisterResponse> {
                 override fun onResponse(
                     call: Call<RegisterResponse>,
                     response: Response<RegisterResponse>
                 ) {
                     _isLoading.value = false
-                    when(response.code()){
+                    when (response.code()) {
                         201 -> {
-                            when{
+                            when {
                                 response.body() == null -> {
                                     _isFailed.value = FailedMessage(true, "Server error.")
                                 }
@@ -48,7 +49,8 @@ class UserViewModel(app: Application) : AndroidViewModel(app) {
                             }
                         }
                         422 -> {
-                            _isFailed.value = FailedMessage(true, "Register failed, please re-check the data")
+                            _isFailed.value =
+                                FailedMessage(true, "Register failed, please re-check the data")
                         }
                     }
                 }
@@ -56,7 +58,7 @@ class UserViewModel(app: Application) : AndroidViewModel(app) {
                 override fun onFailure(call: Call<RegisterResponse>, t: Throwable) {
                     _isLoading.value = false
                     _isFailed.value = FailedMessage(true, t.message.toString())
-                    Log.e(TAG, "onFailure: ${t.message}", )
+                    Log.e(TAG, "onFailure: ${t.message}")
                 }
 
             }
@@ -77,9 +79,9 @@ class UserViewModel(app: Application) : AndroidViewModel(app) {
                     response: Response<LoginResponse>
                 ) {
                     _isLoading.value = false
-                    when(response.code()){
+                    when (response.code()) {
                         200 -> {
-                            when{
+                            when {
                                 response.body() != null -> {
                                     resultToken.value = response.body()!!.token!!
                                 }
@@ -94,7 +96,7 @@ class UserViewModel(app: Application) : AndroidViewModel(app) {
                 override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
                     _isLoading.value = false
                     _isFailed.value = FailedMessage(true, t.message.toString())
-                    Log.e(TAG, "onFailure: ${t.message}", )
+                    Log.e(TAG, "onFailure: ${t.message}")
                 }
 
             }

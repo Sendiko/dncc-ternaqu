@@ -32,7 +32,7 @@ class LoginFragment : Fragment() {
 
     private lateinit var binding: FragmentLoginBinding
 
-    private fun obtainViewModel(activity: FragmentActivity) : UserViewModel {
+    private fun obtainViewModel(activity: FragmentActivity): UserViewModel {
         val factory = ViewModelFactory.getInstance(activity.application)
         return ViewModelProvider(this, factory)[UserViewModel::class.java]
     }
@@ -68,19 +68,21 @@ class LoginFragment : Fragment() {
             findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
         }
 
-        authViewModel.getTokenAccess().observe(viewLifecycleOwner){
+        authViewModel.getTokenAccess().observe(viewLifecycleOwner) {
             Log.d(TAG, "onViewCreated: $it")
         }
 
         binding.buttonLogin.setOnClickListener {
             val email = binding.inputEmail.text.toString()
             val password = binding.inputPassword.text.toString()
-            when  {
+            when {
                 validation(email, password) -> {
-                    userViewModel.postLogin(LoginRequest(
-                        email, password
-                    )).observe(viewLifecycleOwner){
-                        when{
+                    userViewModel.postLogin(
+                        LoginRequest(
+                            email, password
+                        )
+                    ).observe(viewLifecycleOwner) {
+                        when {
                             it != null -> {
                                 authViewModel.saveTokenAccess(it)
                                 authViewModel.setLoginState(true)
@@ -92,23 +94,23 @@ class LoginFragment : Fragment() {
             }
         }
 
-        userViewModel.isFailed.observe(viewLifecycleOwner){
-            when{
+        userViewModel.isFailed.observe(viewLifecycleOwner) {
+            when {
                 it.isFailed -> showSnackbar(it.failedMessage)
             }
         }
 
-        userViewModel.isLoading.observe(viewLifecycleOwner){
+        userViewModel.isLoading.observe(viewLifecycleOwner) {
             showLoading(it)
         }
 
     }
 
-    private fun showSnackbar(message : String){
+    private fun showSnackbar(message: String) {
         Snackbar.make(requireView(), message, Snackbar.LENGTH_LONG).show()
     }
 
-    private fun showLoading(isLoading : Boolean){
+    private fun showLoading(isLoading: Boolean) {
         var loadingDialogFragment = LoadingDialogFragment()
         when {
             isLoading -> {
