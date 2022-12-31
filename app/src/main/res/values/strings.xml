@@ -31,4 +31,5 @@
     <string name="konsul_header">Konsultasi ahli ternak</string>
     <string name="konsul_sub_header">Konsultasi dengan ahli ternak untuk \npembahasan yang lebih lanjut</string>
     <string name="konsul_now">Konsultasi sekarang</string>
+    <string name="loading">Memuat...</string>
 </resources>
