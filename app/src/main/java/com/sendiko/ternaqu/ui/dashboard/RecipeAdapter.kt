@@ -31,7 +31,7 @@ class RecipeAdapter(
     ) {
         val currentItem = recipe[position]
         Glide.with(context)
-            .load(currentItem.url)
+            .load(currentItem.imageUrl)
             .fitCenter()
             .into(holder.binding.imageView6)
         holder.binding.textView7.text = currentItem.title
