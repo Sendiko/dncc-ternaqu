@@ -3,6 +3,7 @@ package com.sendiko.ternaqu.network
 import com.sendiko.ternaqu.network.request.LoginRequest
 import com.sendiko.ternaqu.network.request.RegisterRequest
 import com.sendiko.ternaqu.network.response.LoginResponse
+import com.sendiko.ternaqu.network.response.ProductResponse
 import com.sendiko.ternaqu.network.response.RecipeResponse
 import com.sendiko.ternaqu.network.response.RegisterResponse
 import retrofit2.Call
@@ -24,5 +25,8 @@ interface ApiService {
 
     @GET("recipe")
     fun getRecipe() : Call<RecipeResponse>
+
+    @GET("product")
+    fun getProduct() : Call<ProductResponse>
 
 }
