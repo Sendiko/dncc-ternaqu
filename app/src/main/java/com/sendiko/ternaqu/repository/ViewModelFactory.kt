@@ -3,6 +3,7 @@ package com.sendiko.ternaqu.repository
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.sendiko.ternaqu.repository.product.ProductViewModel
 import com.sendiko.ternaqu.repository.recipe.RecipeViewModel
 import com.sendiko.ternaqu.repository.user.UserViewModel
 
@@ -29,6 +30,7 @@ class ViewModelFactory private constructor(private val app: Application) :
         return when {
             modelClass.isAssignableFrom(UserViewModel::class.java) -> UserViewModel(app) as T
             modelClass.isAssignableFrom(RecipeViewModel::class.java) -> RecipeViewModel(app) as T
+            modelClass.isAssignableFrom(ProductViewModel::class.java) -> ProductViewModel(app) as T
             else -> throw IllegalArgumentException("Unknown model class : " + modelClass.name)
         }
     }
