@@ -5,6 +5,6 @@ data class Product(
     val brand: String,
     val benefit: String,
     val price: Int,
-    val storeName: String,
+    val storeId: Int,
     val url: String,
 )
