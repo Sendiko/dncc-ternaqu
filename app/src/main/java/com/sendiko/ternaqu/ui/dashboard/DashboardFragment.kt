@@ -9,7 +9,9 @@ import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.sendiko.ternaqu.R
 import com.sendiko.ternaqu.databinding.FragmentDashboardBinding
 import com.sendiko.ternaqu.repository.ViewModelFactory
 import com.sendiko.ternaqu.repository.product.ProductRepository
@@ -48,6 +50,10 @@ class DashboardFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.buttonJoinForum.setOnClickListener {
+            findNavController().navigate(R.id.action_dashboardFragment_to_forumFragment)
+        }
 
         productViewModel.getProduct().observe(viewLifecycleOwner) {
             binding.rvProducts.apply {

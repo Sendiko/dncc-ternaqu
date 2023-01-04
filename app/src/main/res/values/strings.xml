@@ -32,4 +32,14 @@
     <string name="konsul_sub_header">Konsultasi dengan ahli ternak untuk \npembahasan yang lebih lanjut</string>
     <string name="konsul_now">Konsultasi sekarang</string>
     <string name="loading">Memuat...</string>
+    <string name="add_answer">Tambah jawaban anda</string>
+    <string name="jumlah_jawaban">2 jawaban</string>
+    <string name="your_answer">Jawaban anda</string>
+    <string name="dummy_topic">Resep sapi gemuk masseh</string>
+    <string name="dummy_topic_sub">Oleh Suhardi, 9 jam yang lalu</string>
+    <string name="arrow_back">Kembali</string>
+    <string name="search_hint">Cari permasalahan anda</string>
+    <string name="forum_header">Paling banyak dicari akhir-akhir ini</string>
+    <string name="forum_sub_header">Pertanyaan paling banyak dicari</string>
+    <string name="suhardi">Suhardi</string>
 </resources>

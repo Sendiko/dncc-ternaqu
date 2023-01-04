@@ -34,7 +34,6 @@ class RecipeViewModel(app: Application) : AndroidViewModel(app) {
                     call: Call<RecipeResponse>,
                     response: Response<RecipeResponse>
                 ) {
-                    _isLoading.value = false
                     when(response.code()){
                         200 -> {
                             when(response.body()){
@@ -52,6 +51,7 @@ class RecipeViewModel(app: Application) : AndroidViewModel(app) {
                                                     i.steps?:"",
                                                     i.imageUrl?:""
                                                     )
+                                                _isLoading.value = false
                                                 recipeList.add(recipe)
                                                 resultRecipe.value = recipeList
                                             }
