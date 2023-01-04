@@ -34,7 +34,6 @@ class ProductViewModel(app: Application) : AndroidViewModel(app) {
                     call: Call<ProductResponse>,
                     response: Response<ProductResponse>
                 ) {
-                    _isLoading.value = false
                     when(response.code()){
                         200 -> {
                             for(i in response.body()!!.product!!){
@@ -49,6 +48,7 @@ class ProductViewModel(app: Application) : AndroidViewModel(app) {
                                             i.storeId?:0,
                                             i.imageUrl?:""
                                         )
+                                        _isLoading.value = false
                                         recipeList.add(product)
                                         resultRecipe.value = recipeList
                                     }
