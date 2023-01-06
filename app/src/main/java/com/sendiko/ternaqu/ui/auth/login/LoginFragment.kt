@@ -87,6 +87,7 @@ class LoginFragment : Fragment() {
                                      authViewModel.saveTokenAccess(token)
                                      authViewModel.setLoginState(true)
                                      authViewModel.saveUserID(it.id!!)
+                                     authViewModel.saveUsername(it.name!!)
                                      startActivity(Intent(requireContext(), MainActivity::class.java))
                                  }
                             }
