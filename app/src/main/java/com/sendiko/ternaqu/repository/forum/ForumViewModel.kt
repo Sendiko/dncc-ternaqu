@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.sendiko.ternaqu.network.request.TopicRequest
 import com.sendiko.ternaqu.network.response.*
 import com.sendiko.ternaqu.repository.model.FailedMessage
 import retrofit2.Call
@@ -119,6 +120,39 @@ class ForumViewModel(app: Application) : AndroidViewModel(app) {
             }
         )
         return resultReplies
+    }
+
+    fun postTopic(
+        token: String,
+        topicRequest: TopicRequest
+    ){
+        _isLoading.value = true
+        val request = repo.postTopic(token, topicRequest)
+        request.enqueue(
+            object : Callback<TopicResponse>{
+                override fun onResponse(
+                    call: Call<TopicResponse>,
+                    response: Response<TopicResponse>
+                ) {
+                    when(response.code()){
+                        201 -> {
+                            // TODO: Notify success request.
+                        }
+                        422 -> {
+                            // TODO: Notify unprocessable request.
+                        }
+                        else -> {
+                            // TODO: Notify server error.
+                        }
+                    }
+                }
+
+                override fun onFailure(call: Call<TopicResponse>, t: Throwable) {
+                    // TODO: Notify server error. 
+                }
+
+            }
+        )
     }
 
 }
