@@ -10,4 +10,6 @@ class ForumRepository(app: Application) {
 
     fun getTopics() = client.getTopics()
 
+    fun getTopic(id : String) = client.getTopic(id)
+
 }

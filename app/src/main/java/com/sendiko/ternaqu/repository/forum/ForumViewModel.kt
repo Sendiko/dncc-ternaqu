@@ -5,6 +5,8 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.sendiko.ternaqu.network.response.RepliesItem
+import com.sendiko.ternaqu.network.response.RepliesResponse
 import com.sendiko.ternaqu.network.response.TopicsResponse
 import com.sendiko.ternaqu.repository.model.FailedMessage
 import com.sendiko.ternaqu.repository.model.Topic
@@ -72,6 +74,48 @@ class ForumViewModel(app: Application) : AndroidViewModel(app) {
             }
         )
         return resultTopic
+    }
+
+    fun getTopic(id : String): LiveData<ArrayList<RepliesItem>> {
+        _isLoading.value = true
+        val repliesList = ArrayList<RepliesItem>()
+        val resultReplies = MutableLiveData<ArrayList<RepliesItem>>()
+        val request = repo.getTopic(id)
+        request.enqueue(
+            object : Callback<RepliesResponse>{
+                override fun onResponse(
+                    call: Call<RepliesResponse>,
+                    response: Response<RepliesResponse>
+                ) {
+                    when(response.code()){
+                        200 -> {
+                            for(i in response.body()!!.replies!!){
+                                when(i){
+                                    null -> _isEmpty.value = true
+                                    else -> {
+                                        val replies = RepliesItem(
+                                            i.id,
+                                            i.title,
+                                            i.name,
+                                            i.question,
+                                            i.profileUrl
+                                        )
+                                        repliesList.add(replies)
+                                        resultReplies.value = repliesList
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                override fun onFailure(call: Call<RepliesResponse>, t: Throwable) {
+                    TODO("Not yet implemented")
+                }
+
+            }
+        )
+        return resultReplies
     }
 
 }
