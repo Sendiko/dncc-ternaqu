@@ -25,9 +25,8 @@ class ForumAdapter(
     override fun onBindViewHolder(holder: ForumViewHolder, position: Int) {
         val currentItem = topics[position]
         Glide.with(context)
-            .load(currentItem.imageUrl)
+            .load(currentItem.profileUrl)
             .circleCrop()
-            .fitCenter()
             .into(holder.binding.imageView9)
         holder.binding.textNameUser.text = currentItem.name
         holder.binding.textTitle.text = currentItem.title
