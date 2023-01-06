@@ -13,8 +13,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sendiko.ternaqu.R
 import com.sendiko.ternaqu.databinding.FragmentDashboardBinding
-import com.sendiko.ternaqu.repository.ViewModelFactory
-import com.sendiko.ternaqu.repository.product.ProductRepository
+import com.sendiko.ternaqu.repository.helper.ViewModelFactory
 import com.sendiko.ternaqu.repository.product.ProductViewModel
 import com.sendiko.ternaqu.repository.recipe.RecipeViewModel
 

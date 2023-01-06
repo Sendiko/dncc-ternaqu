@@ -6,11 +6,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.sendiko.ternaqu.databinding.CardTopicBinding
-import com.sendiko.ternaqu.repository.model.Topic
+import com.sendiko.ternaqu.network.response.TopicsItem
 
 class ForumAdapter(
-    private val topics: ArrayList<Topic>,
-    private val context: Context
+    private val topics: ArrayList<TopicsItem>,
+    private val context: Context,
+    private val onItemClick: OnItemClick
 ): RecyclerView.Adapter<ForumAdapter.ForumViewHolder>() {
 
     class ForumViewHolder(
@@ -31,10 +32,17 @@ class ForumAdapter(
         holder.binding.textNameUser.text = currentItem.name
         holder.binding.textTitle.text = currentItem.title
         holder.binding.textView24.text = currentItem.question
+        holder.binding.root.setOnClickListener {
+            onItemClick.OnReplyCardClick(currentItem)
+        }
     }
 
     override fun getItemCount(): Int {
         return topics.size
+    }
+
+    interface OnItemClick{
+        fun OnReplyCardClick(topic: TopicsItem)
     }
 
 }
