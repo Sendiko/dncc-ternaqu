@@ -6,6 +6,16 @@ import kotlinx.coroutines.launch
 
 class AuthViewModel(private val auth: AuthPreferences) : ViewModel() {
 
+    fun getUserID(): LiveData<Int> {
+        return auth.getUserID().asLiveData()
+    }
+
+    fun saveUserID(userID: Int) {
+        viewModelScope.launch {
+            auth.saveUserID(userID)
+        }
+    }
+
     fun getTokenAccess(): LiveData<String> {
         return auth.getTokenAccess().asLiveData()
     }
