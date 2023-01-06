@@ -13,11 +13,9 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.sendiko.ternaqu.R
-import com.sendiko.ternaqu.databinding.ActivityAuthBinding.inflate
-import com.sendiko.ternaqu.databinding.CardRepliesBinding
 import com.sendiko.ternaqu.databinding.FragmentDetailsForumBinding
-import com.sendiko.ternaqu.repository.SharedViewModel
-import com.sendiko.ternaqu.repository.ViewModelFactory
+import com.sendiko.ternaqu.repository.helper.SharedViewModel
+import com.sendiko.ternaqu.repository.helper.ViewModelFactory
 import com.sendiko.ternaqu.repository.forum.ForumViewModel
 
 private const val TAG = "DetailsForumFragment"

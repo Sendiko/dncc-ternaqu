@@ -10,15 +10,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.FragmentActivity
-import androidx.fragment.app.FragmentResultListener
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.sendiko.ternaqu.R
 import com.sendiko.ternaqu.databinding.FragmentRegisterBinding
-import com.sendiko.ternaqu.network.request.LoginRequest
 import com.sendiko.ternaqu.network.request.RegisterRequest
-import com.sendiko.ternaqu.repository.ViewModelFactory
+import com.sendiko.ternaqu.repository.helper.ViewModelFactory
 import com.sendiko.ternaqu.repository.user.UserViewModel
 import com.sendiko.ternaqu.ui.container.WelcomeActivity
 import com.sendiko.ternaqu.ui.loading.LoadingDialogFragment

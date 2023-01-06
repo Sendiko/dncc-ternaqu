@@ -1,4 +1,4 @@
-package com.sendiko.ternaqu.repository
+package com.sendiko.ternaqu.repository.helper
 
 import android.app.Application
 import androidx.lifecycle.ViewModel

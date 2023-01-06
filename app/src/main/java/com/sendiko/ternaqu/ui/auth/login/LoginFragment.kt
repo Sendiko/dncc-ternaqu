@@ -12,14 +12,13 @@ import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
-import com.google.gson.annotations.SerializedName
 import com.sendiko.ternaqu.R
 import com.sendiko.ternaqu.databinding.FragmentLoginBinding
 import com.sendiko.ternaqu.network.request.LoginRequest
 import com.sendiko.ternaqu.repository.auth.AuthPreferences
 import com.sendiko.ternaqu.repository.AuthViewModel
 import com.sendiko.ternaqu.repository.AuthViewModelFactory
-import com.sendiko.ternaqu.repository.ViewModelFactory
+import com.sendiko.ternaqu.repository.helper.ViewModelFactory
 import com.sendiko.ternaqu.repository.user.UserViewModel
 import com.sendiko.ternaqu.ui.auth.dataStore
 import com.sendiko.ternaqu.ui.container.MainActivity

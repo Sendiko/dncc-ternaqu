@@ -14,10 +14,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.sendiko.ternaqu.R
 import com.sendiko.ternaqu.databinding.FragmentForumBinding
-import com.sendiko.ternaqu.network.response.Topic
 import com.sendiko.ternaqu.network.response.TopicsItem
-import com.sendiko.ternaqu.repository.SharedViewModel
-import com.sendiko.ternaqu.repository.ViewModelFactory
+import com.sendiko.ternaqu.repository.helper.SharedViewModel
+import com.sendiko.ternaqu.repository.helper.ViewModelFactory
 import com.sendiko.ternaqu.repository.forum.ForumViewModel
 import com.sendiko.ternaqu.ui.forum.ForumAdapter.*
 import com.sendiko.ternaqu.ui.loading.LoadingDialogFragment
