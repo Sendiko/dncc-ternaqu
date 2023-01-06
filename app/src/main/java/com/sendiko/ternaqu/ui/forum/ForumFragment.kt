@@ -7,20 +7,26 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.addCallback
 import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.sendiko.ternaqu.R
 import com.sendiko.ternaqu.databinding.FragmentForumBinding
+import com.sendiko.ternaqu.network.response.Topic
+import com.sendiko.ternaqu.network.response.TopicsItem
+import com.sendiko.ternaqu.repository.SharedViewModel
 import com.sendiko.ternaqu.repository.ViewModelFactory
-import com.sendiko.ternaqu.repository.forum.ForumRepository
 import com.sendiko.ternaqu.repository.forum.ForumViewModel
+import com.sendiko.ternaqu.ui.forum.ForumAdapter.*
 import com.sendiko.ternaqu.ui.loading.LoadingDialogFragment
 
 class ForumFragment : Fragment() {
 
     private lateinit var binding: FragmentForumBinding
+
+    private val sharedViewModel : SharedViewModel by activityViewModels()
 
     private fun obtainViewModel(activity: FragmentActivity): ForumViewModel {
         val factory = ViewModelFactory.getInstance(activity.application)
@@ -49,7 +55,13 @@ class ForumFragment : Fragment() {
         forumViewModel.getTopics().observe(viewLifecycleOwner) {
             binding.rvTopics.apply {
                 layoutManager = LinearLayoutManager(context)
-                adapter = ForumAdapter(it, requireContext())
+                adapter = ForumAdapter(it, requireContext(), object : OnItemClick{
+                    override fun OnReplyCardClick(topic: TopicsItem) {
+                        sharedViewModel.safeTopic(topic)
+                        findNavController().navigate(R.id.action_forumFragment_to_detailsForumFragment)
+                    }
+
+                })
                 setHasFixedSize(true)
             }
         }
