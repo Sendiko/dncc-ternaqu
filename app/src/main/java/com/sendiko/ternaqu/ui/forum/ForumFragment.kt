@@ -10,7 +10,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sendiko.ternaqu.R
 import com.sendiko.ternaqu.databinding.FragmentForumBinding
-import com.sendiko.ternaqu.repository.forum.ForumTopicRepository
+import com.sendiko.ternaqu.repository.forum.ForumRepository
 
 class ForumFragment : Fragment() {
 
@@ -33,7 +33,7 @@ class ForumFragment : Fragment() {
 
         binding.rvTopics.apply {
             layoutManager = LinearLayoutManager(context)
-            adapter = ForumAdapter(ForumTopicRepository().getForumTopic(), requireContext())
+            adapter = ForumAdapter(ForumRepository().getForumTopic(), requireContext())
             setHasFixedSize(true)
         }
 
