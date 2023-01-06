@@ -13,6 +13,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 private const val TAG = "ProductViewModel"
+
 class ProductViewModel(app: Application) : AndroidViewModel(app) {
 
     private val repo = ProductRepository(app)
@@ -29,24 +30,24 @@ class ProductViewModel(app: Application) : AndroidViewModel(app) {
         val recipeList = ArrayList<Product>()
         val request = repo.getProduct()
         request.enqueue(
-            object : Callback<ProductResponse>{
+            object : Callback<ProductResponse> {
                 override fun onResponse(
                     call: Call<ProductResponse>,
                     response: Response<ProductResponse>
                 ) {
-                    when(response.code()){
+                    when (response.code()) {
                         200 -> {
-                            for(i in response.body()!!.product!!){
-                                when(i){
+                            for (i in response.body()!!.product!!) {
+                                when (i) {
                                     null -> {}
                                     else -> {
                                         val product = Product(
-                                            i.id?:0,
-                                            i.brand?:"",
-                                            i.benefits?:"",
-                                            i.price?:0,
-                                            i.storeId?:0,
-                                            i.imageUrl?:""
+                                            i.id ?: 0,
+                                            i.brand ?: "",
+                                            i.benefits ?: "",
+                                            i.price ?: 0,
+                                            i.storeId ?: 0,
+                                            i.imageUrl ?: ""
                                         )
                                         _isLoading.value = false
                                         recipeList.add(product)

@@ -5,12 +5,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.sendiko.ternaqu.R
 import com.sendiko.ternaqu.databinding.CardTopicBinding
-import com.sendiko.ternaqu.repository.model.ForumTopic
+import com.sendiko.ternaqu.repository.model.Topic
 
 class ForumAdapter(
-    private val topics: ArrayList<ForumTopic>,
+    private val topics: ArrayList<Topic>,
     private val context: Context
 ): RecyclerView.Adapter<ForumAdapter.ForumViewHolder>() {
 
@@ -26,9 +25,8 @@ class ForumAdapter(
     override fun onBindViewHolder(holder: ForumViewHolder, position: Int) {
         val currentItem = topics[position]
         Glide.with(context)
-            .load(currentItem.imageUrl)
+            .load(currentItem.profileUrl)
             .circleCrop()
-            .fitCenter()
             .into(holder.binding.imageView9)
         holder.binding.textNameUser.text = currentItem.name
         holder.binding.textTitle.text = currentItem.title
