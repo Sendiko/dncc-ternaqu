@@ -148,7 +148,7 @@ class ForumViewModel(app: Application) : AndroidViewModel(app) {
                 }
 
                 override fun onFailure(call: Call<TopicResponse>, t: Throwable) {
-                    // TODO: Notify server error. 
+                    // TODO: Notify server error.
                 }
 
             }
