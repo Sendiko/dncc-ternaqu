@@ -11,9 +11,13 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sendiko.ternaqu.R
 import com.sendiko.ternaqu.databinding.FragmentDashboardBinding
+import com.sendiko.ternaqu.repository.AuthViewModel
+import com.sendiko.ternaqu.repository.AuthViewModelFactory
+import com.sendiko.ternaqu.repository.auth.AuthPreferences
 import com.sendiko.ternaqu.repository.helper.ViewModelFactory
 import com.sendiko.ternaqu.repository.product.ProductViewModel
 import com.sendiko.ternaqu.repository.recipe.RecipeViewModel
+import com.sendiko.ternaqu.ui.auth.dataStore
 
 class DashboardFragment : Fragment() {
 
@@ -37,6 +41,14 @@ class DashboardFragment : Fragment() {
         obtainProductViewModel(requireNotNull(this.activity))
     }
 
+    private val pref by lazy {
+        AuthPreferences.getInstance(requireNotNull(this.context).dataStore)
+    }
+
+    private val authViewModel: AuthViewModel by lazy {
+        ViewModelProvider(this, AuthViewModelFactory(pref))[AuthViewModel::class.java]
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -47,6 +59,10 @@ class DashboardFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        authViewModel.getUsername().observe(viewLifecycleOwner){ name ->
+            "Halo, $name".also { binding.textView3.text = it }
+        }
 
         binding.buttonJoinForum.setOnClickListener {
             findNavController().navigate(R.id.action_dashboardFragment_to_forumFragment)
