@@ -1,12 +1,10 @@
 package com.sendiko.ternaqu.ui.dashboard
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isGone
-import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -72,15 +70,15 @@ class DashboardFragment : Fragment() {
 
         recipeViewModel.isLoading.observe(viewLifecycleOwner){
             when(it){
-                true -> binding.progressBar.isVisible = true
-                else -> binding.progressBar.isGone = true
+                true -> binding.progressBar7.visibility = View.VISIBLE
+                else -> binding.progressBar7.visibility = View.GONE
             }
         }
 
         productViewModel.isLoading.observe(viewLifecycleOwner){
             when(it){
-                true -> binding.progressBar.isVisible = true
-                else -> binding.progressBar.isGone = true
+                true -> binding.progressBar8.visibility = View.VISIBLE
+                else -> binding.progressBar8.visibility = View.GONE
             }
         }
 
