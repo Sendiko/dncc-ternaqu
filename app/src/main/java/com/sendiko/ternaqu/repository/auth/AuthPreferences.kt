@@ -22,7 +22,6 @@ class AuthPreferences private constructor(private val dataStore: DataStore<Prefe
     suspend fun saveTokenAccess(token: String) {
         dataStore.edit { key ->
             key[tokenAccess] = token
-
         }
     }
 
