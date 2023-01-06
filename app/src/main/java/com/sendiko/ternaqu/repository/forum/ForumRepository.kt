@@ -2,7 +2,6 @@ package com.sendiko.ternaqu.repository.forum
 
 import android.app.Application
 import com.sendiko.ternaqu.network.NetworkConfig
-import com.sendiko.ternaqu.repository.model.Topic
 
 class ForumRepository(app: Application) {
 
