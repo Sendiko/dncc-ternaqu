@@ -13,8 +13,6 @@ import com.sendiko.ternaqu.R
 import com.sendiko.ternaqu.databinding.FragmentDashboardBinding
 import com.sendiko.ternaqu.repository.AuthViewModel
 import com.sendiko.ternaqu.repository.AuthViewModelFactory
-import com.sendiko.ternaqu.repository.auth.AuthViewModel
-import com.sendiko.ternaqu.repository.auth.AuthViewModelFactory
 import com.sendiko.ternaqu.repository.auth.AuthPreferences
 import com.sendiko.ternaqu.repository.helper.ViewModelFactory
 import com.sendiko.ternaqu.repository.product.ProductViewModel
