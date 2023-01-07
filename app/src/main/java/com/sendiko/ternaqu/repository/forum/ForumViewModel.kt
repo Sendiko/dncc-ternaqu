@@ -125,34 +125,39 @@ class ForumViewModel(app: Application) : AndroidViewModel(app) {
     fun postTopic(
         token: String,
         topicRequest: TopicRequest
-    ){
+    ): LiveData<Boolean> {
         _isLoading.value = true
-        val request = repo.postTopic(token, topicRequest)
+        val isSuccess = MutableLiveData<Boolean>()
+        val request = repo.postTopic("Bearer $token", topicRequest)
         request.enqueue(
             object : Callback<TopicResponse>{
                 override fun onResponse(
                     call: Call<TopicResponse>,
                     response: Response<TopicResponse>
                 ) {
+                    _isLoading.value = false
                     when(response.code()){
                         201 -> {
-                            // TODO: Notify success request.
+                            isSuccess.value = true
                         }
                         422 -> {
-                            // TODO: Notify unprocessable request.
+                            _isFailed.value = FailedMessage(true, "Request failed, please check the data.")
                         }
                         else -> {
-                            // TODO: Notify server error.
+                            _isFailed.value = FailedMessage(true, "Server error.")
                         }
                     }
                 }
 
                 override fun onFailure(call: Call<TopicResponse>, t: Throwable) {
-                    // TODO: Notify server error.
+                    _isLoading.value = false
+                    _isFailed.value = FailedMessage(true, "${t.message}")
+                    Log.e(TAG, "onFailure: ${t.message}")
                 }
 
             }
         )
+        return isSuccess
     }
 
 }
