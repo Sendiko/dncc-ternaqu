@@ -47,4 +47,6 @@
     <string name="your_keluhan">Ceritakan keluhan anda</string>
     <string name="keluhan_hint">Tulis keluhan anda</string>
     <string name="add_question">Tambah Pertanyaan</string>
+    <string name="lihat_selengkapnya">lihat selengkapnya</string>
+    <string name="search_recipe">Cari resep pangan</string>
 </resources>
