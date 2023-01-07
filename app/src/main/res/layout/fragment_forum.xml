@@ -58,10 +58,11 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:drawableEnd="@drawable/search"
             android:fontFamily="@font/poppins"
             android:hint="@string/search_hint"
-            android:textColor="@color/textColor"
-            android:drawableEnd="@drawable/search"/>
+            android:singleLine="true"
+            android:textColor="@color/textColor" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
