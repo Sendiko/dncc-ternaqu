@@ -8,7 +8,7 @@ data class RepliesResponse(
 	val replies: List<RepliesItem?>? = null,
 
 	@field:SerializedName("topic")
-	val topic: Topic? = null,
+	val topic: Topics? = null,
 
 	@field:SerializedName("message")
 	val message: String? = null,
@@ -17,7 +17,7 @@ data class RepliesResponse(
 	val status: Int? = null
 )
 
-data class Topic(
+data class Topics(
 
 	@field:SerializedName("profileUrl")
 	val profileUrl: String? = null,

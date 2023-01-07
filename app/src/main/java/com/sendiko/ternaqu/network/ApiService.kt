@@ -2,12 +2,10 @@ package com.sendiko.ternaqu.network
 
 import com.sendiko.ternaqu.network.request.LoginRequest
 import com.sendiko.ternaqu.network.request.RegisterRequest
+import com.sendiko.ternaqu.network.request.TopicRequest
 import com.sendiko.ternaqu.network.response.*
 import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
+import retrofit2.http.*
 
 interface ApiService {
 
@@ -34,5 +32,11 @@ interface ApiService {
     fun getTopic(
         @Path("id") id: String
     ) : Call<RepliesResponse>
+
+    @POST("topics")
+    fun postTopic(
+        @Header("Authorization") token: String,
+        @Body topicRequest: TopicRequest
+    ): Call<TopicResponse>
 
 }

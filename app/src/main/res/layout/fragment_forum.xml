@@ -58,10 +58,11 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:drawableEnd="@drawable/search"
             android:fontFamily="@font/poppins"
             android:hint="@string/search_hint"
-            android:textColor="@color/textColor"
-            android:drawableEnd="@drawable/search"/>
+            android:singleLine="true"
+            android:textColor="@color/textColor" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
@@ -86,17 +87,21 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_topics"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
             android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
             tools:listitem="@layout/card_topic">
 
         </androidx.recyclerview.widget.RecyclerView>
@@ -117,6 +122,22 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.5" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/button_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="@color/secondaryBlue"
+            android:clickable="true"
+            android:focusable="true"
+            android:foregroundTint="@color/whiteBgAlt"
+            android:src="@drawable/ic_baseline_add_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:tint="@color/whiteBgAlt"
+            tools:ignore="SpeakableTextPresentCheck" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -4,10 +4,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.util.Patterns
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -15,9 +15,9 @@ import com.google.android.material.snackbar.Snackbar
 import com.sendiko.ternaqu.R
 import com.sendiko.ternaqu.databinding.FragmentLoginBinding
 import com.sendiko.ternaqu.network.request.LoginRequest
-import com.sendiko.ternaqu.repository.auth.AuthPreferences
 import com.sendiko.ternaqu.repository.AuthViewModel
 import com.sendiko.ternaqu.repository.AuthViewModelFactory
+import com.sendiko.ternaqu.repository.auth.AuthPreferences
 import com.sendiko.ternaqu.repository.helper.ViewModelFactory
 import com.sendiko.ternaqu.repository.user.UserViewModel
 import com.sendiko.ternaqu.ui.auth.dataStore
@@ -80,12 +80,21 @@ class LoginFragment : Fragment() {
                         LoginRequest(
                             email, password
                         )
-                    ).observe(viewLifecycleOwner) {
+                    ).observe(viewLifecycleOwner) { token ->
                         when {
-                            it != null -> {
-                                authViewModel.saveTokenAccess(it)
-                                authViewModel.setLoginState(true)
-                                startActivity(Intent(requireContext(), MainActivity::class.java))
+                            token != null -> {
+                                userViewModel.user.observe(viewLifecycleOwner) {
+                                    authViewModel.saveTokenAccess(token)
+                                    authViewModel.setLoginState(true)
+                                    authViewModel.saveUserID(it.id!!)
+                                    authViewModel.saveUsername(it.name!!)
+                                    startActivity(
+                                        Intent(
+                                            requireContext(),
+                                            MainActivity::class.java
+                                        )
+                                    )
+                                }
                             }
                         }
                     }

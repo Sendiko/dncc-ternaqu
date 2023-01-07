@@ -1,31 +1,30 @@
 package com.sendiko.ternaqu.ui.forum
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
-import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.sendiko.ternaqu.R
-import com.sendiko.ternaqu.databinding.FragmentForumBinding
-import com.sendiko.ternaqu.network.response.TopicsItem
+import com.sendiko.ternaqu.databinding.FragmentPostTopicBinding
+import com.sendiko.ternaqu.network.request.TopicRequest
+import com.sendiko.ternaqu.repository.AuthViewModel
+import com.sendiko.ternaqu.repository.AuthViewModelFactory
+import com.sendiko.ternaqu.repository.auth.AuthPreferences
 import com.sendiko.ternaqu.repository.forum.ForumViewModel
-import com.sendiko.ternaqu.repository.helper.SharedViewModel
 import com.sendiko.ternaqu.repository.helper.ViewModelFactory
-import com.sendiko.ternaqu.ui.forum.ForumAdapter.OnItemClick
+import com.sendiko.ternaqu.ui.auth.dataStore
 import com.sendiko.ternaqu.ui.loading.LoadingDialogFragment
 
-class ForumFragment : Fragment() {
+private const val TAG = "PostTopicFragment"
+class PostTopicFragment : Fragment() {
 
-    private lateinit var binding: FragmentForumBinding
-
-    private val sharedViewModel : SharedViewModel by activityViewModels()
+    private lateinit var binding: FragmentPostTopicBinding
 
     private fun obtainViewModel(activity: FragmentActivity): ForumViewModel {
         val factory = ViewModelFactory.getInstance(activity.application)
@@ -36,54 +35,56 @@ class ForumFragment : Fragment() {
         obtainViewModel(requireNotNull(this.activity))
     }
 
+    private val pref by lazy {
+        AuthPreferences.getInstance(requireNotNull(this.context).dataStore)
+    }
+
+    private val authViewModel: AuthViewModel by lazy {
+        ViewModelProvider(this, AuthViewModelFactory(pref))[AuthViewModel::class.java]
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentForumBinding.inflate(layoutInflater)
+        binding = FragmentPostTopicBinding.inflate(layoutInflater)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        onBackPressed()
-        binding.navBack.setOnClickListener {
-            findNavController().navigate(R.id.action_forumFragment_to_dashboardFragment)
-        }
 
-        binding.buttonAdd.setOnClickListener {
-            findNavController().navigate(R.id.action_forumFragment_to_postTopicFragment)
-        }
-
-        forumViewModel.getTopics().observe(viewLifecycleOwner) {
-            binding.rvTopics.apply {
-                layoutManager = LinearLayoutManager(context)
-                adapter = ForumAdapter(it, requireContext(), object : OnItemClick{
-                    override fun OnReplyCardClick(topic: TopicsItem) {
-                        sharedViewModel.safeTopic(topic)
-                        findNavController().navigate(R.id.action_forumFragment_to_detailsForumFragment)
+        binding.buttonPost.setOnClickListener {
+            val title = binding.inputTitle.text.toString()
+            val question = binding.inputQuestion.text.toString()
+            authViewModel.getUserID().observe(viewLifecycleOwner) { userId ->
+                authViewModel.getTokenAccess().observe(viewLifecycleOwner) { token ->
+                    Log.i(TAG, "onViewCreated: $token")
+                    forumViewModel.postTopic(
+                        token, TopicRequest(
+                            userId,
+                            title,
+                            question,
+                            0
+                        )
+                    ).observe(viewLifecycleOwner) {
+                        when (it) {
+                            true -> findNavController().navigate(R.id.action_postTopicFragment_to_forumFragment)
+                            else -> {}
+                        }
                     }
-
-                })
-                setHasFixedSize(true)
+                }
             }
         }
 
-        forumViewModel.isFailed.observe(viewLifecycleOwner){
+        forumViewModel.isFailed.observe(viewLifecycleOwner) {
             when {
                 it.isFailed -> showSnackbar(it.failedMessage)
             }
         }
 
-        forumViewModel.isLoading.observe(viewLifecycleOwner){
+        forumViewModel.isLoading.observe(viewLifecycleOwner) {
             showLoading(it)
-        }
-
-        forumViewModel.isEmpty.observe(viewLifecycleOwner){
-            when(it){
-                true -> binding.dataEmpty.visibility = View.VISIBLE
-                else -> binding.dataEmpty.visibility = View.GONE
-            }
         }
 
     }
@@ -103,12 +104,6 @@ class ForumFragment : Fragment() {
                     parentFragmentManager.findFragmentByTag(LoadingDialogFragment().FRAGMENT_TAG) as LoadingDialogFragment
                 loadingDialogFragment.dismiss()
             }
-        }
-    }
-
-    private fun onBackPressed() {
-        requireActivity().onBackPressedDispatcher.addCallback(this) {
-            findNavController().navigate(R.id.action_forumFragment_to_dashboardFragment)
         }
     }
 

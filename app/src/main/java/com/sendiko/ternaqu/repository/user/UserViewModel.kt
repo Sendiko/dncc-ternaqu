@@ -9,6 +9,7 @@ import com.sendiko.ternaqu.network.request.LoginRequest
 import com.sendiko.ternaqu.network.request.RegisterRequest
 import com.sendiko.ternaqu.network.response.LoginResponse
 import com.sendiko.ternaqu.network.response.RegisterResponse
+import com.sendiko.ternaqu.network.response.User
 import com.sendiko.ternaqu.repository.model.FailedMessage
 import retrofit2.Call
 import retrofit2.Callback
@@ -25,6 +26,9 @@ class UserViewModel(app: Application) : AndroidViewModel(app) {
 
     private val _isFailed = MutableLiveData<FailedMessage>()
     val isFailed: LiveData<FailedMessage> = _isFailed
+
+    private val _user = MutableLiveData<User>()
+    val user: LiveData<User> = _user
 
     fun postRegister(
         registerRequest: RegisterRequest
@@ -84,6 +88,7 @@ class UserViewModel(app: Application) : AndroidViewModel(app) {
                             when {
                                 response.body() != null -> {
                                     resultToken.value = response.body()!!.token!!
+                                    _user.value = response.body()!!.user!!
                                 }
                             }
                         }

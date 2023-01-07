@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.sendiko.ternaqu.network.request.TopicRequest
 import com.sendiko.ternaqu.network.response.*
 import com.sendiko.ternaqu.repository.model.FailedMessage
 import retrofit2.Call
@@ -119,6 +120,44 @@ class ForumViewModel(app: Application) : AndroidViewModel(app) {
             }
         )
         return resultReplies
+    }
+
+    fun postTopic(
+        token: String,
+        topicRequest: TopicRequest
+    ): LiveData<Boolean> {
+        _isLoading.value = true
+        val isSuccess = MutableLiveData<Boolean>()
+        val request = repo.postTopic("Bearer $token", topicRequest)
+        request.enqueue(
+            object : Callback<TopicResponse>{
+                override fun onResponse(
+                    call: Call<TopicResponse>,
+                    response: Response<TopicResponse>
+                ) {
+                    _isLoading.value = false
+                    when(response.code()){
+                        201 -> {
+                            isSuccess.value = true
+                        }
+                        422 -> {
+                            _isFailed.value = FailedMessage(true, "Request failed, please check the data.")
+                        }
+                        else -> {
+                            _isFailed.value = FailedMessage(true, "Server error.")
+                        }
+                    }
+                }
+
+                override fun onFailure(call: Call<TopicResponse>, t: Throwable) {
+                    _isLoading.value = false
+                    _isFailed.value = FailedMessage(true, "${t.message}")
+                    Log.e(TAG, "onFailure: ${t.message}")
+                }
+
+            }
+        )
+        return isSuccess
     }
 
 }
