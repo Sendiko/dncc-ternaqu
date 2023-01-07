@@ -72,6 +72,10 @@ class DashboardFragment : Fragment() {
             findNavController().navigate(R.id.action_dashboardFragment_to_recipeListFragment)
         }
 
+        binding.button3.setOnClickListener {
+            findNavController().navigate(R.id.action_dashboardFragment_to_productListFragment)
+        }
+
         productViewModel.getProduct().observe(viewLifecycleOwner) {
             binding.rvProducts.apply {
                 layoutManager =
