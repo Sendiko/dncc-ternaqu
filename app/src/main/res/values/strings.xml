@@ -50,4 +50,6 @@
     <string name="lihat_selengkapnya">lihat selengkapnya</string>
     <string name="search_recipe">Cari resep pangan</string>
     <string name="search_product">Cari merek pangan pilihan</string>
+    <string name="alat_dan_bahan">Alat dan bahan</string>
+    <string name="steps">Cara membuat</string>
 </resources>
