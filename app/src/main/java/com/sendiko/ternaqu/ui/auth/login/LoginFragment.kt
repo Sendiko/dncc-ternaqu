@@ -83,13 +83,18 @@ class LoginFragment : Fragment() {
                     ).observe(viewLifecycleOwner) { token ->
                         when {
                             token != null -> {
-                                 userViewModel.user.observe(viewLifecycleOwner){
-                                     authViewModel.saveTokenAccess(token)
-                                     authViewModel.setLoginState(true)
-                                     authViewModel.saveUserID(it.id!!)
-                                     authViewModel.saveUsername(it.name!!)
-                                     startActivity(Intent(requireContext(), MainActivity::class.java))
-                                 }
+                                userViewModel.user.observe(viewLifecycleOwner) {
+                                    authViewModel.saveTokenAccess(token)
+                                    authViewModel.setLoginState(true)
+                                    authViewModel.saveUserID(it.id!!)
+                                    authViewModel.saveUsername(it.name!!)
+                                    startActivity(
+                                        Intent(
+                                            requireContext(),
+                                            MainActivity::class.java
+                                        )
+                                    )
+                                }
                             }
                         }
                     }
