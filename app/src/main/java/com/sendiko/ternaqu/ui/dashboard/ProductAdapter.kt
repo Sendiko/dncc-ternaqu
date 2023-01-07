@@ -6,10 +6,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.sendiko.ternaqu.databinding.CardRvBinding
-import com.sendiko.ternaqu.repository.model.Product
+import com.sendiko.ternaqu.network.response.ProductItem
 
 class ProductAdapter(
-    private val product: ArrayList<Product>,
+    private val product: ArrayList<ProductItem>,
     private val context: Context
 ): RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
 
@@ -27,9 +27,9 @@ class ProductAdapter(
 
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
         val currentItem = product[position]
-        holder.binding.textView7.text = currentItem.brand
+        holder.binding.textView7.text = currentItem.title
         Glide.with(context)
-            .load(currentItem.url)
+            .load(currentItem.imageUrl)
             .fitCenter()
             .into(holder.binding.imageView6)
     }

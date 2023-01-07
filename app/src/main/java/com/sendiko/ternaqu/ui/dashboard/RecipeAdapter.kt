@@ -6,10 +6,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.sendiko.ternaqu.databinding.CardRvBinding
-import com.sendiko.ternaqu.repository.model.Recipe
+import com.sendiko.ternaqu.network.response.RecipeItem
 
 class RecipeAdapter(
-    private val recipe: ArrayList<Recipe>,
+    private val recipe: ArrayList<RecipeItem>,
     private val context: Context
 ) : RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder>() {
 
