@@ -5,9 +5,9 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.sendiko.ternaqu.network.response.ProductItem
 import com.sendiko.ternaqu.network.response.ProductResponse
 import com.sendiko.ternaqu.repository.model.FailedMessage
-import com.sendiko.ternaqu.repository.model.Product
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -24,10 +24,10 @@ class ProductViewModel(app: Application) : AndroidViewModel(app) {
     private val _isFailed = MutableLiveData<FailedMessage>()
     val isFailed: LiveData<FailedMessage> = _isFailed
 
-    fun getProduct(): LiveData<ArrayList<Product>> {
+    fun getProduct(): LiveData<ArrayList<ProductItem>> {
         _isLoading.value = false
-        val resultRecipe = MutableLiveData<ArrayList<Product>>()
-        val recipeList = ArrayList<Product>()
+        val resultRecipe = MutableLiveData<ArrayList<ProductItem>>()
+        val recipeList = ArrayList<ProductItem>()
         val request = repo.getProduct()
         request.enqueue(
             object : Callback<ProductResponse> {
@@ -42,13 +42,16 @@ class ProductViewModel(app: Application) : AndroidViewModel(app) {
                                 when (i) {
                                     null -> {}
                                     else -> {
-                                        val product = Product(
-                                            i.id ?: 0,
-                                            i.brand ?: "",
-                                            i.benefits ?: "",
-                                            i.price ?: 0,
-                                            i.storeId ?: 0,
-                                            i.imageUrl ?: ""
+                                        val product = ProductItem(
+                                            i.id,
+                                            i.brand,
+                                            i.brand,
+                                            i.description,
+                                            i.benefits,
+                                            i.price,
+                                            i.storeId,
+                                            i.productId,
+                                            i.imageUrl
                                         )
                                         recipeList.add(product)
                                         resultRecipe.value = recipeList
