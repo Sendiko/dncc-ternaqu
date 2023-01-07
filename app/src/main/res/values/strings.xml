@@ -42,4 +42,9 @@
     <string name="forum_header">Paling banyak dicari akhir-akhir ini</string>
     <string name="forum_sub_header">Pertanyaan paling banyak dicari</string>
     <string name="suhardi">Suhardi</string>
+    <string name="your_question">Apa yang ingin anda tanyakan?</string>
+    <string name="question_hint">Tulis pertanyaan anda</string>
+    <string name="your_keluhan">Ceritakan keluhan anda</string>
+    <string name="keluhan_hint">Tulis keluhan anda</string>
+    <string name="add_question">Tambah Pertanyaan</string>
 </resources>
