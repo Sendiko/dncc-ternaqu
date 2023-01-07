@@ -1,11 +1,11 @@
 package com.sendiko.ternaqu.ui.forum
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.addCallback
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
@@ -15,10 +15,10 @@ import com.google.android.material.snackbar.Snackbar
 import com.sendiko.ternaqu.R
 import com.sendiko.ternaqu.databinding.FragmentForumBinding
 import com.sendiko.ternaqu.network.response.TopicsItem
+import com.sendiko.ternaqu.repository.forum.ForumViewModel
 import com.sendiko.ternaqu.repository.helper.SharedViewModel
 import com.sendiko.ternaqu.repository.helper.ViewModelFactory
-import com.sendiko.ternaqu.repository.forum.ForumViewModel
-import com.sendiko.ternaqu.ui.forum.ForumAdapter.*
+import com.sendiko.ternaqu.ui.forum.ForumAdapter.OnItemClick
 import com.sendiko.ternaqu.ui.loading.LoadingDialogFragment
 
 class ForumFragment : Fragment() {
@@ -49,6 +49,10 @@ class ForumFragment : Fragment() {
         onBackPressed()
         binding.navBack.setOnClickListener {
             findNavController().navigate(R.id.action_forumFragment_to_dashboardFragment)
+        }
+
+        binding.buttonAdd.setOnClickListener {
+            findNavController().navigate(R.id.action_forumFragment_to_postTopicFragment)
         }
 
         forumViewModel.getTopics().observe(viewLifecycleOwner) {
