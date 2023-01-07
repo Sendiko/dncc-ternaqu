@@ -11,7 +11,7 @@ data class LoginResponse(
 	val tokenType: String? = null,
 
 	@field:SerializedName("user")
-	val user: UserR? = null,
+	val user: User? = null,
 
 	@field:SerializedName("status")
 	val status: Int? = null,
@@ -20,7 +20,10 @@ data class LoginResponse(
 	val token: String? = null
 )
 
-data class UserR(
+data class User(
+
+	@field:SerializedName("profileUrl")
+	val profileUrl: String? = null,
 
 	@field:SerializedName("premium")
 	val premium: String? = null,

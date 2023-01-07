@@ -10,7 +10,7 @@ data class TopicRequest(
 	@field:SerializedName("title")
 	val title: String? = null,
 
-	@field:SerializedName("question")
+	@field:SerializedName("quzestion")
 	val question: String? = null,
 
 	@field:SerializedName("replyTo")
