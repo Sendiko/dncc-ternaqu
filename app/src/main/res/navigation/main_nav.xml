@@ -9,7 +9,7 @@
         android:id="@+id/dashboardFragment"
         android:name="com.sendiko.ternaqu.ui.dashboard.DashboardFragment"
         android:label="fragment_dashboard"
-        tools:layout="@layout/fragment_dashboard" >
+        tools:layout="@layout/fragment_dashboard">
         <action
             android:id="@+id/action_dashboardFragment_to_forumFragment"
             app:destination="@id/forumFragment"
@@ -55,12 +55,21 @@
             app:popUpToInclusive="true"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_dashboardFragment_to_profileFragment"
+            app:destination="@id/profileFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popUpTo="@id/profileFragment"
+            app:popUpToInclusive="true"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/forumFragment"
         android:name="com.sendiko.ternaqu.ui.forum.ForumFragment"
         android:label="fragment_forum"
-        tools:layout="@layout/fragment_forum" >
+        tools:layout="@layout/fragment_forum">
         <action
             android:id="@+id/action_forumFragment_to_dashboardFragment"
             app:destination="@id/dashboardFragment"
@@ -93,7 +102,7 @@
         android:id="@+id/detailsForumFragment"
         android:name="com.sendiko.ternaqu.ui.forum.DetailsForumFragment"
         android:label="fragment_details_forum"
-        tools:layout="@layout/fragment_details_forum" >
+        tools:layout="@layout/fragment_details_forum">
         <action
             android:id="@+id/action_detailsForumFragment_to_forumFragment"
             app:destination="@id/forumFragment"
@@ -117,7 +126,7 @@
         android:id="@+id/postTopicFragment"
         android:name="com.sendiko.ternaqu.ui.forum.PostTopicFragment"
         android:label="fragment_post_topic"
-        tools:layout="@layout/fragment_post_topic" >
+        tools:layout="@layout/fragment_post_topic">
         <action
             android:id="@+id/action_postTopicFragment_to_forumFragment"
             app:destination="@id/forumFragment"
@@ -132,7 +141,7 @@
         android:id="@+id/recipeListFragment"
         android:name="com.sendiko.ternaqu.ui.recipe.RecipeListFragment"
         android:label="fragment_recipe_list"
-        tools:layout="@layout/fragment_recipe_list" >
+        tools:layout="@layout/fragment_recipe_list">
         <action
             android:id="@+id/action_recipeListFragment_to_dashboardFragment"
             app:destination="@id/dashboardFragment"
@@ -156,7 +165,7 @@
         android:id="@+id/productListFragment"
         android:name="com.sendiko.ternaqu.ui.product.ProductListFragment"
         android:label="fragment_product_list"
-        tools:layout="@layout/fragment_product_list" >
+        tools:layout="@layout/fragment_product_list">
         <action
             android:id="@+id/action_productListFragment_to_dashboardFragment"
             app:destination="@id/dashboardFragment"
@@ -180,7 +189,7 @@
         android:id="@+id/detailRecipeFragment"
         android:name="com.sendiko.ternaqu.ui.recipe.DetailRecipeFragment"
         android:label="fragment_detail_recipe"
-        tools:layout="@layout/fragment_detail_recipe" >
+        tools:layout="@layout/fragment_detail_recipe">
         <action
             android:id="@+id/action_detailRecipeFragment_to_recipeListFragment"
             app:destination="@id/recipeListFragment"
@@ -195,7 +204,7 @@
         android:id="@+id/detailProductFragment"
         android:name="com.sendiko.ternaqu.ui.product.DetailProductFragment"
         android:label="fragment_detail_product"
-        tools:layout="@layout/fragment_detail_product" >
+        tools:layout="@layout/fragment_detail_product">
         <action
             android:id="@+id/action_detailProductFragment_to_productListFragment"
             app:destination="@id/productListFragment"
@@ -210,13 +219,28 @@
         android:id="@+id/postReplyFragment"
         android:name="com.sendiko.ternaqu.ui.forum.PostReplyFragment"
         android:label="fragment_post_reply"
-        tools:layout="@layout/fragment_post_reply" >
+        tools:layout="@layout/fragment_post_reply">
         <action
             android:id="@+id/action_postReplyFragment_to_detailsForumFragment"
             app:destination="@id/detailsForumFragment"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popUpTo="@id/detailsForumFragment"
+            app:popUpToInclusive="true"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.sendiko.ternaqu.ui.user.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_dashboardFragment"
+            app:destination="@id/dashboardFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popUpTo="@id/dashboardFragment"
             app:popUpToInclusive="true"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />

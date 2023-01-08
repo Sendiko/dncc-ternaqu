@@ -9,7 +9,7 @@ import com.sendiko.ternaqu.network.response.ProductItem
 import com.sendiko.ternaqu.network.response.ProductResponse
 import com.sendiko.ternaqu.network.response.ProductsResponse
 import com.sendiko.ternaqu.network.response.Store
-import com.sendiko.ternaqu.repository.model.FailedMessage
+import com.sendiko.ternaqu.repository.helper.FailedMessage
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

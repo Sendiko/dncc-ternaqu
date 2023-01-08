@@ -10,7 +10,8 @@ import com.sendiko.ternaqu.network.request.RegisterRequest
 import com.sendiko.ternaqu.network.response.LoginResponse
 import com.sendiko.ternaqu.network.response.RegisterResponse
 import com.sendiko.ternaqu.network.response.User
-import com.sendiko.ternaqu.repository.model.FailedMessage
+import com.sendiko.ternaqu.network.response.UserResponse
+import com.sendiko.ternaqu.repository.helper.FailedMessage
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -107,6 +108,38 @@ class UserViewModel(app: Application) : AndroidViewModel(app) {
             }
         )
         return resultToken
+    }
+
+    fun getUser(token: String): LiveData<UserResponse>{
+        _isLoading.value = true
+        val resultUser = MutableLiveData<UserResponse>()
+        val request = repo.getUser("Bearer $token")
+        request.enqueue(
+            object : Callback<UserResponse>{
+                override fun onResponse(
+                    call: Call<UserResponse>,
+                    response: Response<UserResponse>
+                ) {
+                    _isLoading.value = false
+                    when(response.code()){
+                        200 -> {
+                            resultUser.value = response.body()!!
+                        }
+                        else -> {
+                            _isFailed.value = FailedMessage(true, "Server error.")
+                        }
+                    }
+                }
+
+                override fun onFailure(call: Call<UserResponse>, t: Throwable) {
+                    _isLoading.value = false
+                    _isFailed.value = FailedMessage(true, "Server error.")
+                    Log.e(TAG, "onFailure: ${t.message}")
+                }
+
+            }
+        )
+        return resultUser
     }
 
 }

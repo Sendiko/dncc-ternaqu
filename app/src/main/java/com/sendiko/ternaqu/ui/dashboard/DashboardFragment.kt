@@ -70,6 +70,10 @@ class DashboardFragment : Fragment() {
             "Halo, $name".also { binding.textView3.text = it }
         }
 
+        binding.imageView4.setOnClickListener {
+            findNavController().navigate(R.id.action_dashboardFragment_to_profileFragment)
+        }
+
         binding.buttonJoinForum.setOnClickListener {
             findNavController().navigate(R.id.action_dashboardFragment_to_forumFragment)
         }

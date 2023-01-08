@@ -5,11 +5,42 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
+import com.google.android.material.snackbar.Snackbar
+import com.sendiko.ternaqu.R
 import com.sendiko.ternaqu.databinding.FragmentProfileBinding
+import com.sendiko.ternaqu.repository.AuthViewModel
+import com.sendiko.ternaqu.repository.AuthViewModelFactory
+import com.sendiko.ternaqu.repository.auth.AuthPreferences
+import com.sendiko.ternaqu.repository.helper.ViewModelFactory
+import com.sendiko.ternaqu.repository.user.UserViewModel
+import com.sendiko.ternaqu.ui.auth.dataStore
+import com.sendiko.ternaqu.ui.loading.LoadingDialogFragment
 
 class ProfileFragment : Fragment() {
 
     private lateinit var binding: FragmentProfileBinding
+
+    private fun obtainViewModel(activity: FragmentActivity): UserViewModel {
+        val factory = ViewModelFactory.getInstance(activity.application)
+        return ViewModelProvider(this, factory)[UserViewModel::class.java]
+    }
+
+    private val userViewModel by lazy {
+        obtainViewModel(requireNotNull(this.activity))
+    }
+
+    private val pref by lazy {
+        AuthPreferences.getInstance(requireNotNull(this.context).dataStore)
+    }
+
+    private val authViewModel: AuthViewModel by lazy {
+        ViewModelProvider(this, AuthViewModelFactory(pref))[AuthViewModel::class.java]
+    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -20,7 +51,57 @@ class ProfileFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
         super.onViewCreated(view, savedInstanceState)
+
+        binding.navBack.setOnClickListener {
+            findNavController().navigate(R.id.action_profileFragment_to_dashboardFragment)
+        }
+
+        authViewModel.getTokenAccess().observe(viewLifecycleOwner) {
+            userViewModel.getUser(it).observe(viewLifecycleOwner) { user ->
+                Glide.with(requireContext())
+                    .load(user.profileUrl)
+                    .circleCrop()
+                    .into(binding.imageView11)
+
+                binding.textNameUser.text = user.name
+                binding.textEmail.text = user.email
+                when (user.premium) {
+                    "0" -> binding.button4.text = getString(R.string.go_premium)
+                    "1" -> binding.button4.text = getString(R.string.is_premium)
+                }
+            }
+        }
+
+        userViewModel.isFailed.observe(viewLifecycleOwner) {
+            when {
+                it.isFailed -> showSnackbar(it.failedMessage)
+            }
+        }
+
+        userViewModel.isLoading.observe(viewLifecycleOwner) {
+            showLoading(it)
+        }
+
+    }
+
+    private fun showSnackbar(message: String) {
+        Snackbar.make(requireView(), message, Snackbar.LENGTH_LONG).show()
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        var loadingDialogFragment = LoadingDialogFragment()
+        when {
+            isLoading -> {
+                loadingDialogFragment.show(parentFragmentManager)
+            }
+            else -> {
+                loadingDialogFragment =
+                    parentFragmentManager.findFragmentByTag(LoadingDialogFragment().FRAGMENT_TAG) as LoadingDialogFragment
+                loadingDialogFragment.dismiss()
+            }
+        }
     }
 
 }

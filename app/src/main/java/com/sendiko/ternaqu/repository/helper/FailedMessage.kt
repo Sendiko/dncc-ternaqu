@@ -1,4 +1,4 @@
-package com.sendiko.ternaqu.repository.model
+package com.sendiko.ternaqu.repository.helper
 
 data class FailedMessage(
     val isFailed: Boolean,
