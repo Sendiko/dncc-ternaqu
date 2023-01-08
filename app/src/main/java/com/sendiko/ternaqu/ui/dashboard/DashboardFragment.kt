@@ -81,7 +81,7 @@ class DashboardFragment : Fragment() {
             findNavController().navigate(R.id.action_dashboardFragment_to_productListFragment)
         }
 
-        productViewModel.getProduct().observe(viewLifecycleOwner) {
+        productViewModel.getProducts().observe(viewLifecycleOwner) {
             binding.rvProducts.apply {
                 layoutManager =
                     LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
