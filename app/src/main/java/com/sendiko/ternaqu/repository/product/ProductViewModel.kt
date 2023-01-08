@@ -5,9 +5,11 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.sendiko.ternaqu.network.response.ProductItem
 import com.sendiko.ternaqu.network.response.ProductResponse
+import com.sendiko.ternaqu.network.response.ProductsResponse
+import com.sendiko.ternaqu.network.response.Store
 import com.sendiko.ternaqu.repository.model.FailedMessage
-import com.sendiko.ternaqu.repository.model.Product
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -24,16 +26,16 @@ class ProductViewModel(app: Application) : AndroidViewModel(app) {
     private val _isFailed = MutableLiveData<FailedMessage>()
     val isFailed: LiveData<FailedMessage> = _isFailed
 
-    fun getProduct(): LiveData<ArrayList<Product>> {
+    fun getProducts(): LiveData<ArrayList<ProductItem>> {
         _isLoading.value = false
-        val resultRecipe = MutableLiveData<ArrayList<Product>>()
-        val recipeList = ArrayList<Product>()
-        val request = repo.getProduct()
+        val resultRecipe = MutableLiveData<ArrayList<ProductItem>>()
+        val recipeList = ArrayList<ProductItem>()
+        val request = repo.getProducts()
         request.enqueue(
-            object : Callback<ProductResponse> {
+            object : Callback<ProductsResponse> {
                 override fun onResponse(
-                    call: Call<ProductResponse>,
-                    response: Response<ProductResponse>
+                    call: Call<ProductsResponse>,
+                    response: Response<ProductsResponse>
                 ) {
                     _isLoading.value = false
                     when (response.code()) {
@@ -42,13 +44,16 @@ class ProductViewModel(app: Application) : AndroidViewModel(app) {
                                 when (i) {
                                     null -> {}
                                     else -> {
-                                        val product = Product(
-                                            i.id ?: 0,
-                                            i.brand ?: "",
-                                            i.benefits ?: "",
-                                            i.price ?: 0,
-                                            i.storeId ?: 0,
-                                            i.imageUrl ?: ""
+                                        val product = ProductItem(
+                                            i.id,
+                                            i.brand,
+                                            i.brand,
+                                            i.description,
+                                            i.benefits,
+                                            i.price,
+                                            i.storeId,
+                                            i.productId,
+                                            i.imageUrl
                                         )
                                         recipeList.add(product)
                                         resultRecipe.value = recipeList
@@ -65,7 +70,7 @@ class ProductViewModel(app: Application) : AndroidViewModel(app) {
                     }
                 }
 
-                override fun onFailure(call: Call<ProductResponse>, t: Throwable) {
+                override fun onFailure(call: Call<ProductsResponse>, t: Throwable) {
                     _isLoading.value = false
                     _isFailed.value = FailedMessage(true, "${t.message}")
                     Log.e(TAG, "onFailure: ${t.message}")
@@ -74,6 +79,38 @@ class ProductViewModel(app: Application) : AndroidViewModel(app) {
             }
         )
         return resultRecipe
+    }
+
+    fun getProduct(id: String): LiveData<Store> {
+        _isLoading.value = true
+        val resultStore = MutableLiveData<Store>()
+        val request = repo.getProduct(id)
+        request.enqueue(
+            object : Callback<ProductResponse> {
+                override fun onResponse(
+                    call: Call<ProductResponse>,
+                    response: Response<ProductResponse>
+                ) {
+                    _isLoading.value = false
+                    when (response.code()) {
+                        200 -> {
+                            resultStore.value = response.body()!!.store!!
+                        }
+                        else -> {
+                            _isFailed.value = FailedMessage(true, "Server error.")
+                        }
+                    }
+                }
+
+                override fun onFailure(call: Call<ProductResponse>, t: Throwable) {
+                    _isLoading.value = false
+                    _isFailed.value = FailedMessage(true, "${t.message}")
+                    Log.e(TAG, "onFailure: ${t.message}")
+                }
+
+            }
+        )
+        return resultStore
     }
 
 }

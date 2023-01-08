@@ -4,8 +4,11 @@ import com.google.gson.annotations.SerializedName
 
 data class ProductResponse(
 
-	@field:SerializedName("product")
-	val product: List<ProductItem?>? = null,
+	@field:SerializedName("recipe")
+	val recipe: Recipe? = null,
+
+	@field:SerializedName("store")
+	val store: Store? = null,
 
 	@field:SerializedName("message")
 	val message: String? = null,
@@ -14,7 +17,7 @@ data class ProductResponse(
 	val status: Int? = null
 )
 
-data class ProductItem(
+data class Recipe(
 
 	@field:SerializedName("benefits")
 	val benefits: String? = null,
@@ -48,4 +51,28 @@ data class ProductItem(
 
 	@field:SerializedName("brand")
 	val brand: String? = null
+)
+
+data class Store(
+
+	@field:SerializedName("store_id")
+	val storeId: String? = null,
+
+	@field:SerializedName("address")
+	val address: String? = null,
+
+	@field:SerializedName("updated_at")
+	val updatedAt: String? = null,
+
+	@field:SerializedName("name")
+	val name: String? = null,
+
+	@field:SerializedName("description")
+	val description: String? = null,
+
+	@field:SerializedName("created_at")
+	val createdAt: String? = null,
+
+	@field:SerializedName("id")
+	val id: Int? = null
 )

@@ -47,4 +47,11 @@
     <string name="your_keluhan">Ceritakan keluhan anda</string>
     <string name="keluhan_hint">Tulis keluhan anda</string>
     <string name="add_question">Tambah Pertanyaan</string>
+    <string name="lihat_selengkapnya">lihat selengkapnya</string>
+    <string name="search_recipe">Cari resep pangan</string>
+    <string name="search_product">Cari merek pangan pilihan</string>
+    <string name="alat_dan_bahan">Alat dan bahan</string>
+    <string name="steps">Cara membuat</string>
+    <string name="label_detail">Detail Produk </string>
+    <string name="label_benefit">Manfaat Produk</string>
 </resources>

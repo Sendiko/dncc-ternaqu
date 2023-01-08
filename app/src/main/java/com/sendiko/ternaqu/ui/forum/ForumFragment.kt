@@ -60,7 +60,7 @@ class ForumFragment : Fragment() {
                 layoutManager = LinearLayoutManager(context)
                 adapter = ForumAdapter(it, requireContext(), object : OnItemClick{
                     override fun OnReplyCardClick(topic: TopicsItem) {
-                        sharedViewModel.safeTopic(topic)
+                        sharedViewModel.saveTopic(topic)
                         findNavController().navigate(R.id.action_forumFragment_to_detailsForumFragment)
                     }
 

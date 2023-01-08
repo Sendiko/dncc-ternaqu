@@ -5,9 +5,9 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.sendiko.ternaqu.network.response.RecipeItem
 import com.sendiko.ternaqu.network.response.RecipeResponse
 import com.sendiko.ternaqu.repository.model.FailedMessage
-import com.sendiko.ternaqu.repository.model.Recipe
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -23,10 +23,10 @@ class RecipeViewModel(app: Application) : AndroidViewModel(app) {
     private val _isFailed = MutableLiveData<FailedMessage>()
     val isFailed: LiveData<FailedMessage> = _isFailed
 
-    fun getRecipe(): LiveData<ArrayList<Recipe>> {
+    fun getRecipe(): LiveData<ArrayList<RecipeItem>> {
         _isLoading.value = true
-        val resultRecipe = MutableLiveData<ArrayList<Recipe>>()
-        val recipeList = ArrayList<Recipe>()
+        val resultRecipe = MutableLiveData<ArrayList<RecipeItem>>()
+        val recipeList = ArrayList<RecipeItem>()
         val request = repo.getRecipe()
         request.enqueue(
             object : Callback<RecipeResponse>{
@@ -44,13 +44,13 @@ class RecipeViewModel(app: Application) : AndroidViewModel(app) {
                                         when(i){
                                             null -> _isFailed.value = FailedMessage(true, "Data empty.")
                                             else -> {
-                                                val recipe = Recipe(
-                                                    i.id?:0,
-                                                    i.title?:"",
-                                                    i.benefit?:"",
-                                                    i.toolsAndMaterials?:"",
-                                                    i.steps?:"",
-                                                    i.imageUrl?:""
+                                                val recipe = RecipeItem(
+                                                    i.id,
+                                                    i.title,
+                                                    i.benefit,
+                                                    i.steps,
+                                                    i.toolsAndMaterials,
+                                                    i.imageUrl
                                                     )
                                                 recipeList.add(recipe)
                                                 resultRecipe.value = recipeList
