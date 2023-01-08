@@ -57,4 +57,9 @@
     <string name="reply_hint">Tulis jawaban atau pendapat anda</string>
     <string name="send">Kirim</string>
     <string name="cancel">Batal</string>
+    <string name="go_premium">Beralih ke premium</string>
+    <string name="is_premium">Pengguna Premium</string>
+    <string name="setting_label">Pengaturan profil</string>
+    <string name="masukan_label">Masukan</string>
+    <string name="logout">Logout</string>
 </resources>
