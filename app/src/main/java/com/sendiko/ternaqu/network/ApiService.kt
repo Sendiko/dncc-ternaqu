@@ -19,6 +19,11 @@ interface ApiService {
         @Body registerRequest: RegisterRequest
     ): Call<RegisterResponse>
 
+    @GET("user")
+    fun getUser(
+        @Header("Authorization") token: String
+    ) : Call<UserResponse>
+
     @GET("recipe")
     fun getRecipe() : Call<RecipeResponse>
 
