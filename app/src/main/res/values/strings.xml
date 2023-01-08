@@ -52,4 +52,6 @@
     <string name="search_product">Cari merek pangan pilihan</string>
     <string name="alat_dan_bahan">Alat dan bahan</string>
     <string name="steps">Cara membuat</string>
+    <string name="label_detail">Detail Produk </string>
+    <string name="label_benefit">Manfaat Produk</string>
 </resources>
