@@ -22,7 +22,7 @@ import com.sendiko.ternaqu.ui.container.WelcomeActivity
 import com.sendiko.ternaqu.ui.loading.LoadingDialogFragment
 
 private const val TAG = "RegisterFragment"
-
+private const val defaultProfileUrl = "https://cdn-icons-png.flaticon.com/512/1946/1946429.png"
 class RegisterFragment : Fragment() {
 
     private lateinit var binding: FragmentRegisterBinding
@@ -65,7 +65,7 @@ class RegisterFragment : Fragment() {
                 validate(name, email, password, passwordConfirmation) ->
                     userViewModel.postRegister(
                         RegisterRequest(
-                            name, email, password, passwordConfirmation, null.toString()
+                            name, email, password, passwordConfirmation, defaultProfileUrl
                         )
                     ).observe(viewLifecycleOwner) {
                         when {

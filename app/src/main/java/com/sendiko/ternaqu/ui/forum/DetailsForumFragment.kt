@@ -1,22 +1,22 @@
 package com.sendiko.ternaqu.ui.forum
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.sendiko.ternaqu.R
 import com.sendiko.ternaqu.databinding.FragmentDetailsForumBinding
+import com.sendiko.ternaqu.repository.forum.ForumViewModel
 import com.sendiko.ternaqu.repository.helper.SharedViewModel
 import com.sendiko.ternaqu.repository.helper.ViewModelFactory
-import com.sendiko.ternaqu.repository.forum.ForumViewModel
 
 private const val TAG = "DetailsForumFragment"
 class DetailsForumFragment : Fragment() {
@@ -47,6 +47,10 @@ class DetailsForumFragment : Fragment() {
 
         binding.navBack.setOnClickListener {
             findNavController().navigate(R.id.action_detailsForumFragment_to_forumFragment)
+        }
+
+        binding.button.setOnClickListener {
+            findNavController().navigate(R.id.action_detailsForumFragment_to_postReplyFragment)
         }
 
         sharedViewModel.topic.observe(viewLifecycleOwner) {
