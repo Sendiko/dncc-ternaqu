@@ -124,13 +124,18 @@
                             android:text="@string/alat_dan_bahan"
                             android:textSize="16sp" />
 
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginEnd="16dp"
+                            android:background="@color/md_theme_light_onBackground"/>
+
                         <TextView
                             android:id="@+id/textView29"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="16dp"
-                            android:layout_marginEnd="16dp"
-                            android:layout_marginBottom="16dp"
+                            android:layout_margin="16dp"
                             android:fontFamily="@font/poppins"
                             android:text="@string/alat_dan_bahan" />
                     </LinearLayout>
@@ -160,13 +165,18 @@
                             android:text="@string/steps"
                             android:textSize="16sp" />
 
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginEnd="16dp"
+                            android:background="@color/md_theme_light_onBackground"/>
+
                         <TextView
                             android:id="@+id/textView31"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="16dp"
-                            android:layout_marginEnd="16dp"
-                            android:layout_marginBottom="16dp"
+                            android:layout_margin="16dp"
                             android:fontFamily="@font/poppins"
                             android:text="@string/steps" />
                     </LinearLayout>
