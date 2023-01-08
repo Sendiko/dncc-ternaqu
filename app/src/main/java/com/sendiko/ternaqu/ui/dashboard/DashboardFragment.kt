@@ -96,7 +96,7 @@ class DashboardFragment : Fragment() {
                 adapter = RecipeAdapter(it, requireContext(), object : RecipeAdapter.OnItemClick{
                     override fun onCardRecipeClick(recipe: RecipeItem) {
                         sharedViewModel.saveRecipe(recipe)
-                        findNavController().navigate(R.id.action_recipeListFragment_to_detailRecipeFragment)
+                        findNavController().navigate(R.id.action_dashboardFragment_to_detailRecipeFragment)
                     }
 
                 })
