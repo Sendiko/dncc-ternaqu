@@ -7,10 +7,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.sendiko.ternaqu.network.request.LoginRequest
 import com.sendiko.ternaqu.network.request.RegisterRequest
-import com.sendiko.ternaqu.network.response.LoginResponse
-import com.sendiko.ternaqu.network.response.RegisterResponse
-import com.sendiko.ternaqu.network.response.User
-import com.sendiko.ternaqu.network.response.UserResponse
+import com.sendiko.ternaqu.network.response.*
 import com.sendiko.ternaqu.repository.helper.FailedMessage
 import retrofit2.Call
 import retrofit2.Callback
@@ -110,18 +107,18 @@ class UserViewModel(app: Application) : AndroidViewModel(app) {
         return resultToken
     }
 
-    fun getUser(token: String): LiveData<UserResponse>{
+    fun getUser(token: String): LiveData<UserResponse> {
         _isLoading.value = true
         val resultUser = MutableLiveData<UserResponse>()
         val request = repo.getUser("Bearer $token")
         request.enqueue(
-            object : Callback<UserResponse>{
+            object : Callback<UserResponse> {
                 override fun onResponse(
                     call: Call<UserResponse>,
                     response: Response<UserResponse>
                 ) {
                     _isLoading.value = false
-                    when(response.code()){
+                    when (response.code()) {
                         200 -> {
                             resultUser.value = response.body()!!
                         }
@@ -140,6 +137,33 @@ class UserViewModel(app: Application) : AndroidViewModel(app) {
             }
         )
         return resultUser
+    }
+
+    fun postLogout(token: String): LiveData<Boolean> {
+        _isLoading.value = true
+        val isSuccess = MutableLiveData<Boolean>()
+        val request = repo.postLogout("Bearer $token")
+        request.enqueue(
+            object : Callback<LogoutResponse> {
+                override fun onResponse(
+                    call: Call<LogoutResponse>,
+                    response: Response<LogoutResponse>
+                ) {
+                    _isLoading.value = false
+                    when (response.code()) {
+                        200 -> isSuccess.value = true
+                        else -> _isFailed.value = FailedMessage(true, "Server error.")
+                    }
+                }
+
+                override fun onFailure(call: Call<LogoutResponse>, t: Throwable) {
+                    _isLoading.value = false
+                    _isFailed.value = FailedMessage(true, "Server error.")
+                }
+
+            }
+        )
+        return isSuccess
     }
 
 }

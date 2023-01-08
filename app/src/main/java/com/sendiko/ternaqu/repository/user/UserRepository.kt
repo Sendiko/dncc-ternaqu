@@ -13,6 +13,8 @@ class UserRepository(app: Application) {
 
     fun postRegister(registerRequest: RegisterRequest) = client.postRegister(registerRequest)
 
+    fun postLogout(token: String) = client.postLogout(token)
+
     fun getUser(token: String) = client.getUser(token)
 
 }
