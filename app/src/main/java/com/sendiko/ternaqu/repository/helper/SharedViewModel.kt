@@ -26,7 +26,7 @@ class SharedViewModel: ViewModel() {
     private val _product = MutableLiveData<ProductItem>()
     val product: LiveData<ProductItem> = _product
 
-    fun saveRecipe(product: ProductItem){
+    fun saveProduct(product: ProductItem){
         _product.value = product
     }
 
