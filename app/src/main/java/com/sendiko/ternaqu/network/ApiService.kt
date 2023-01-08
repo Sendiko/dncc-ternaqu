@@ -19,29 +19,34 @@ interface ApiService {
         @Body registerRequest: RegisterRequest
     ): Call<RegisterResponse>
 
+    @POST("logout")
+    fun postLogout(
+        @Header("Authorization") token: String
+    ): Call<LogoutResponse>
+
     @GET("user")
     fun getUser(
         @Header("Authorization") token: String
-    ) : Call<UserResponse>
+    ): Call<UserResponse>
 
     @GET("recipe")
-    fun getRecipe() : Call<RecipeResponse>
+    fun getRecipe(): Call<RecipeResponse>
 
     @GET("product")
-    fun getProducts() : Call<ProductsResponse>
+    fun getProducts(): Call<ProductsResponse>
 
     @GET("product/{id}")
     fun getProduct(
         @Path("id") id: String
-    ) : Call<ProductResponse>
+    ): Call<ProductResponse>
 
     @GET("topics")
-    fun getTopics() : Call<TopicsResponse>
+    fun getTopics(): Call<TopicsResponse>
 
     @GET("topics/{id}")
     fun getTopic(
         @Path("id") id: String
-    ) : Call<RepliesResponse>
+    ): Call<RepliesResponse>
 
     @POST("topics")
     fun postTopic(

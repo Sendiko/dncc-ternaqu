@@ -119,62 +119,63 @@
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
-            app:cardElevation="0dp"
+            app:cardBackgroundColor="@color/fadeBlue"
             app:cardCornerRadius="16dp"
-            app:cardBackgroundColor="@color/fadeBlue">
+            app:cardElevation="0dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:layout_margin="16dp">
+                android:layout_margin="16dp"
+                android:orientation="horizontal">
 
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@drawable/document"/>
+                    android:src="@drawable/document" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/masukan_label"
-                    android:textSize="16sp"
                     android:layout_marginStart="8dp"
-                    android:fontFamily="@font/poppins_medium"/>
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="@string/masukan_label"
+                    android:textSize="16sp" />
 
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>
 
         <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_logout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
-            app:cardElevation="0dp"
-            app:cardCornerRadius="16dp"
             app:cardBackgroundColor="@color/whiteBgAlt"
-            app:strokeWidth="2dp"
-            app:strokeColor="@color/secondaryBlue">
+            app:cardCornerRadius="16dp"
+            app:cardElevation="0dp"
+            app:strokeColor="@color/secondaryBlue"
+            app:strokeWidth="2dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:layout_margin="16dp">
+                android:layout_margin="16dp"
+                android:orientation="horizontal">
 
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@drawable/upload"/>
+                    android:src="@drawable/upload" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/logout"
-                    android:textSize="16sp"
                     android:layout_marginStart="8dp"
-                    android:fontFamily="@font/poppins_medium"/>
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="@string/logout"
+                    android:textSize="16sp" />
 
             </LinearLayout>
 

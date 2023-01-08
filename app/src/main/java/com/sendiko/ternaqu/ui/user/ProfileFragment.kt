@@ -1,5 +1,6 @@
 package com.sendiko.ternaqu.ui.user
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -18,6 +19,7 @@ import com.sendiko.ternaqu.repository.auth.AuthPreferences
 import com.sendiko.ternaqu.repository.helper.ViewModelFactory
 import com.sendiko.ternaqu.repository.user.UserViewModel
 import com.sendiko.ternaqu.ui.auth.dataStore
+import com.sendiko.ternaqu.ui.container.WelcomeActivity
 import com.sendiko.ternaqu.ui.loading.LoadingDialogFragment
 
 class ProfileFragment : Fragment() {
@@ -56,6 +58,26 @@ class ProfileFragment : Fragment() {
 
         binding.navBack.setOnClickListener {
             findNavController().navigate(R.id.action_profileFragment_to_dashboardFragment)
+        }
+
+        binding.cardLogout.setOnClickListener {
+            authViewModel.getTokenAccess().observe(viewLifecycleOwner) {
+                userViewModel.postLogout(it).observe(viewLifecycleOwner){ isSuccess ->
+                    when (isSuccess) {
+                        true -> {
+                            authViewModel.logoutApp().also {
+                                requireContext().startActivity(
+                                    Intent(
+                                        requireContext(),
+                                        WelcomeActivity::class.java
+                                    )
+                                )
+                            }
+                        }
+                        else -> {}
+                    }
+                }
+            }
         }
 
         authViewModel.getTokenAccess().observe(viewLifecycleOwner) {

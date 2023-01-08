@@ -16,6 +16,12 @@ class AuthViewModel(private val auth: AuthPreferences) : ViewModel() {
         }
     }
 
+    fun logoutApp(){
+        viewModelScope.launch {
+            auth.logoutApp()
+        }
+    }
+
     fun getUserID(): LiveData<Int> {
         return auth.getUserID().asLiveData()
     }
