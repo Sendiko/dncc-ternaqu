@@ -7,7 +7,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.sendiko.ternaqu.network.response.RecipeItem
 import com.sendiko.ternaqu.network.response.RecipeResponse
-import com.sendiko.ternaqu.repository.model.FailedMessage
+import com.sendiko.ternaqu.repository.helper.FailedMessage
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
