@@ -54,4 +54,7 @@
     <string name="steps">Cara membuat</string>
     <string name="label_detail">Detail Produk </string>
     <string name="label_benefit">Manfaat Produk</string>
+    <string name="reply_hint">Tulis jawaban atau pendapat anda</string>
+    <string name="send">Kirim</string>
+    <string name="cancel">Batal</string>
 </resources>
