@@ -10,7 +10,8 @@ import com.sendiko.ternaqu.network.response.RecipeItem
 
 class RecipeListAdapter(
     private val recipe: ArrayList<RecipeItem>,
-    private val context: Context
+    private val context: Context,
+    private val onItemClick: OnItemClick
 ) : RecyclerView.Adapter<RecipeListAdapter.RecipeListViewHolder>() {
 
     class RecipeListViewHolder(var binding: CardListItemBinding) :
@@ -30,10 +31,17 @@ class RecipeListAdapter(
             .load(currentItem.imageUrl)
             .circleCrop()
             .into(holder.binding.imageView8)
+        holder.binding.root.setOnClickListener {
+            onItemClick.onCardRecipeClick(currentItem)
+        }
     }
 
     override fun getItemCount(): Int {
         return recipe.size
+    }
+
+    interface OnItemClick{
+        fun onCardRecipeClick(recipe: RecipeItem)
     }
 
 }

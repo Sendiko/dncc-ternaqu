@@ -115,6 +115,15 @@
             app:popUpToInclusive="true"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_recipeListFragment_to_detailRecipeFragment"
+            app:destination="@id/detailRecipeFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popUpTo="@id/detailRecipeFragment"
+            app:popUpToInclusive="true"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/productListFragment"
@@ -127,6 +136,21 @@
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popUpTo="@id/dashboardFragment"
+            app:popUpToInclusive="true"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailRecipeFragment"
+        android:name="com.sendiko.ternaqu.ui.recipe.DetailRecipeFragment"
+        android:label="fragment_detail_recipe"
+        tools:layout="@layout/fragment_detail_recipe" >
+        <action
+            android:id="@+id/action_detailRecipeFragment_to_recipeListFragment"
+            app:destination="@id/recipeListFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popUpTo="@id/recipeListFragment"
             app:popUpToInclusive="true"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />

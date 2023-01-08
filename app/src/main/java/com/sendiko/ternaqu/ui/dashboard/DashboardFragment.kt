@@ -6,14 +6,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sendiko.ternaqu.R
 import com.sendiko.ternaqu.databinding.FragmentDashboardBinding
+import com.sendiko.ternaqu.network.response.RecipeItem
 import com.sendiko.ternaqu.repository.AuthViewModel
 import com.sendiko.ternaqu.repository.AuthViewModelFactory
 import com.sendiko.ternaqu.repository.auth.AuthPreferences
+import com.sendiko.ternaqu.repository.helper.SharedViewModel
 import com.sendiko.ternaqu.repository.helper.ViewModelFactory
 import com.sendiko.ternaqu.repository.product.ProductViewModel
 import com.sendiko.ternaqu.repository.recipe.RecipeViewModel
@@ -22,6 +25,8 @@ import com.sendiko.ternaqu.ui.auth.dataStore
 class DashboardFragment : Fragment() {
 
     private lateinit var binding: FragmentDashboardBinding
+
+    private val sharedViewModel : SharedViewModel by activityViewModels()
 
     private fun obtainRecipeViewModel(activity: FragmentActivity): RecipeViewModel {
         val factory = ViewModelFactory.getInstance(activity.application)
@@ -88,7 +93,13 @@ class DashboardFragment : Fragment() {
             binding.rvResep.apply {
                 layoutManager =
                     LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-                adapter = RecipeAdapter(it, requireContext())
+                adapter = RecipeAdapter(it, requireContext(), object : RecipeAdapter.OnItemClick{
+                    override fun onCardRecipeClick(recipe: RecipeItem) {
+                        sharedViewModel.saveRecipe(recipe)
+                        findNavController().navigate(R.id.action_recipeListFragment_to_detailRecipeFragment)
+                    }
+
+                })
             }
         }
 
