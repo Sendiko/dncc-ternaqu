@@ -12,11 +12,13 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.google.android.material.snackbar.Snackbar
 import com.sendiko.ternaqu.R
 import com.sendiko.ternaqu.databinding.FragmentDetailsForumBinding
 import com.sendiko.ternaqu.repository.forum.ForumViewModel
 import com.sendiko.ternaqu.repository.helper.SharedViewModel
 import com.sendiko.ternaqu.repository.helper.ViewModelFactory
+import com.sendiko.ternaqu.ui.loading.LoadingDialogFragment
 
 private const val TAG = "DetailsForumFragment"
 class DetailsForumFragment : Fragment() {
@@ -61,7 +63,12 @@ class DetailsForumFragment : Fragment() {
                 .into(binding.imageView7)
 
             binding.textView13.text = it.title
-            "Oleh ${it.name}, ${it.createdAt}".also { binding.textView14.text = it }
+            binding.textView14.text = buildString {
+                append("Oleh ")
+                append(it.name)
+                append(", ")
+                append(it.createdAt)
+            }
             binding.textView16.text = it.question
 
             forumViewModel.getTopic(it.id.toString()).observe(viewLifecycleOwner){
@@ -69,11 +76,49 @@ class DetailsForumFragment : Fragment() {
                     layoutManager = LinearLayoutManager(requireContext())
                     adapter = RepliesAdapter(it, requireContext())
                 }
+
+                binding.textCount.text = buildString {
+                    append(it.size)
+                    append(" jawaban")
+                }
+
             }
 
             Log.i(TAG, "onViewCreated: $it")
         }
 
+        forumViewModel.isFailed.observe(viewLifecycleOwner){
+            when {
+                it.isFailed -> showSnackbar(it.failedMessage)
+            }
+        }
+
+        forumViewModel.isLoading.observe(viewLifecycleOwner){
+            showLoading(it)
+            when(it){
+                true -> binding.textCount.visibility = View.GONE
+                else -> binding.textCount.visibility = View.VISIBLE
+            }
+        }
+
+    }
+
+    private fun showSnackbar(message: String) {
+        Snackbar.make(requireView(), message, Snackbar.LENGTH_LONG).show()
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        var loadingDialogFragment = LoadingDialogFragment()
+        when {
+            isLoading -> {
+                loadingDialogFragment.show(parentFragmentManager)
+            }
+            else -> {
+                loadingDialogFragment =
+                    parentFragmentManager.findFragmentByTag(LoadingDialogFragment().FRAGMENT_TAG) as LoadingDialogFragment
+                loadingDialogFragment.dismiss()
+            }
+        }
     }
 
 }
