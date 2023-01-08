@@ -42,7 +42,7 @@ class ProductListFragment : Fragment() {
             findNavController().navigate(R.id.action_productListFragment_to_dashboardFragment)
         }
 
-        productViewModel.getProduct().observe(viewLifecycleOwner){
+        productViewModel.getProducts().observe(viewLifecycleOwner){
             binding.rvProductsList.apply {
                 layoutManager = LinearLayoutManager(context)
                 adapter = ProductListAdapter(it, requireContext())

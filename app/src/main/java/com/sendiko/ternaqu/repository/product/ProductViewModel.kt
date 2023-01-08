@@ -6,7 +6,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.sendiko.ternaqu.network.response.ProductItem
-import com.sendiko.ternaqu.network.response.ProductResponse
+import com.sendiko.ternaqu.network.response.ProductsResponse
 import com.sendiko.ternaqu.repository.model.FailedMessage
 import retrofit2.Call
 import retrofit2.Callback
@@ -24,16 +24,16 @@ class ProductViewModel(app: Application) : AndroidViewModel(app) {
     private val _isFailed = MutableLiveData<FailedMessage>()
     val isFailed: LiveData<FailedMessage> = _isFailed
 
-    fun getProduct(): LiveData<ArrayList<ProductItem>> {
+    fun getProducts(): LiveData<ArrayList<ProductItem>> {
         _isLoading.value = false
         val resultRecipe = MutableLiveData<ArrayList<ProductItem>>()
         val recipeList = ArrayList<ProductItem>()
-        val request = repo.getProduct()
+        val request = repo.getProducts()
         request.enqueue(
-            object : Callback<ProductResponse> {
+            object : Callback<ProductsResponse> {
                 override fun onResponse(
-                    call: Call<ProductResponse>,
-                    response: Response<ProductResponse>
+                    call: Call<ProductsResponse>,
+                    response: Response<ProductsResponse>
                 ) {
                     _isLoading.value = false
                     when (response.code()) {
@@ -68,7 +68,7 @@ class ProductViewModel(app: Application) : AndroidViewModel(app) {
                     }
                 }
 
-                override fun onFailure(call: Call<ProductResponse>, t: Throwable) {
+                override fun onFailure(call: Call<ProductsResponse>, t: Throwable) {
                     _isLoading.value = false
                     _isFailed.value = FailedMessage(true, "${t.message}")
                     Log.e(TAG, "onFailure: ${t.message}")
