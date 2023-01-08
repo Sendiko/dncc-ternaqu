@@ -88,6 +88,7 @@ class ForumViewModel(app: Application) : AndroidViewModel(app) {
                     call: Call<RepliesResponse>,
                     response: Response<RepliesResponse>
                 ) {
+                    _isLoading.value = false
                     when(response.code()){
                         200 -> {
                             for(i in response.body()!!.replies!!){
@@ -114,7 +115,8 @@ class ForumViewModel(app: Application) : AndroidViewModel(app) {
                 }
 
                 override fun onFailure(call: Call<RepliesResponse>, t: Throwable) {
-                    TODO("Not yet implemented")
+                    _isLoading.value = true
+                    _isFailed.value = FailedMessage(true, "${t.message}")
                 }
 
             }
