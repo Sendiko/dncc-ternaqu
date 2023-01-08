@@ -24,6 +24,12 @@ class AuthPreferences private constructor(private val dataStore: DataStore<Prefe
         }
     }
 
+    suspend fun logoutApp(){
+        dataStore.edit { key ->
+            key.clear()
+        }
+    }
+
     fun getUserID(): Flow<Int> {
         return dataStore.data.map { key ->
             key[userIDKey] ?: 0
