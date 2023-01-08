@@ -10,7 +10,8 @@ import com.sendiko.ternaqu.network.response.ProductItem
 
 class ProductAdapter(
     private val product: ArrayList<ProductItem>,
-    private val context: Context
+    private val context: Context,
+    private val onItemClick : OnItemClick
 ): RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
 
     class ProductViewHolder(
@@ -20,9 +21,9 @@ class ProductAdapter(
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): ProductAdapter.ProductViewHolder {
+    ): ProductViewHolder {
         val binding = CardRvBinding.inflate(LayoutInflater.from(parent.context))
-        return ProductAdapter.ProductViewHolder(binding)
+        return ProductViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
@@ -32,8 +33,15 @@ class ProductAdapter(
             .load(currentItem.imageUrl)
             .fitCenter()
             .into(holder.binding.imageView6)
+        holder.binding.root.setOnClickListener {
+            onItemClick.onCardRecipeClick(currentItem)
+        }
     }
 
     override fun getItemCount(): Int = product.size
+
+    interface OnItemClick {
+        fun onCardRecipeClick(product: ProductItem)
+    }
 
 }
