@@ -23,7 +23,12 @@ interface ApiService {
     fun getRecipe() : Call<RecipeResponse>
 
     @GET("product")
-    fun getProduct() : Call<ProductResponse>
+    fun getProducts() : Call<ProductsResponse>
+
+    @GET("product/{id}")
+    fun getProduct(
+        @Path("id") id: String
+    ) : Call<ProductResponse>
 
     @GET("topics")
     fun getTopics() : Call<TopicsResponse>

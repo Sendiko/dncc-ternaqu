@@ -7,6 +7,8 @@ class ProductRepository(app : Application) {
 
     private val client = NetworkConfig.getInstance(app)
 
-    fun getProduct() = client.getProduct()
+    fun getProducts() = client.getProducts()
+
+    fun getProduct(id: String) = client.getProduct(id)
 
 }

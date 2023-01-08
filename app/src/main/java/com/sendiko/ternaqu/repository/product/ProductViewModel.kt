@@ -6,7 +6,9 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.sendiko.ternaqu.network.response.ProductItem
+import com.sendiko.ternaqu.network.response.ProductResponse
 import com.sendiko.ternaqu.network.response.ProductsResponse
+import com.sendiko.ternaqu.network.response.Store
 import com.sendiko.ternaqu.repository.model.FailedMessage
 import retrofit2.Call
 import retrofit2.Callback
@@ -77,6 +79,38 @@ class ProductViewModel(app: Application) : AndroidViewModel(app) {
             }
         )
         return resultRecipe
+    }
+
+    fun getProduct(id: String): LiveData<Store> {
+        _isLoading.value = true
+        val resultStore = MutableLiveData<Store>()
+        val request = repo.getProduct(id)
+        request.enqueue(
+            object : Callback<ProductResponse> {
+                override fun onResponse(
+                    call: Call<ProductResponse>,
+                    response: Response<ProductResponse>
+                ) {
+                    _isLoading.value = false
+                    when (response.code()) {
+                        200 -> {
+                            resultStore.value = response.body()!!.store!!
+                        }
+                        else -> {
+                            _isFailed.value = FailedMessage(true, "Server error.")
+                        }
+                    }
+                }
+
+                override fun onFailure(call: Call<ProductResponse>, t: Throwable) {
+                    _isLoading.value = false
+                    _isFailed.value = FailedMessage(true, "${t.message}")
+                    Log.e(TAG, "onFailure: ${t.message}")
+                }
+
+            }
+        )
+        return resultStore
     }
 
 }
