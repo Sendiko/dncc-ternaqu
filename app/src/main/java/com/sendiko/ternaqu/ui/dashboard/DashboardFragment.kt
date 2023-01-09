@@ -86,6 +86,10 @@ class DashboardFragment : Fragment() {
             findNavController().navigate(R.id.action_dashboardFragment_to_productListFragment)
         }
 
+        binding.buttonChatNutritionist.setOnClickListener {
+            findNavController().navigate(R.id.action_dashboardFragment_to_chatListFragment)
+        }
+
         productViewModel.getProducts().observe(viewLifecycleOwner) {
             binding.rvProducts.apply {
                 layoutManager =
