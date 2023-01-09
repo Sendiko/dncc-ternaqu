@@ -28,4 +28,23 @@ class ChatRepository {
         )
     }
 
+    fun getMessageList(): ArrayList<Message>{
+        return arrayListOf(
+            Message(
+                1,
+                "Hai, dengan sendiko disini ada yang bisa saya bantu?",
+                "07:00",
+                "AWAY",
+                true
+            ),
+            Message(
+                1,
+                "Halo, Saya haris. saya ingin bertanya tentang jumlah nutrisi yang cocok untuk ternak saya",
+                "07:01",
+                "HOME",
+                false
+            ),
+        )
+    }
+
 }

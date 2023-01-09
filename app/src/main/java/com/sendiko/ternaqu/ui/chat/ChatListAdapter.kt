@@ -10,7 +10,8 @@ import com.sendiko.ternaqu.repository.chat.Chat
 
 class ChatListAdapter(
     private val chat: ArrayList<Chat>,
-    private val context: Context
+    private val context: Context,
+    private val onClick: OnItemClick
 ): RecyclerView.Adapter<ChatListAdapter.ChatListViewHolder>() {
 
     class ChatListViewHolder(val binding: CardNutritionistBinding): RecyclerView.ViewHolder(binding.root)
@@ -28,10 +29,17 @@ class ChatListAdapter(
             .load(currentItem.profileUrl)
             .circleCrop()
             .into(holder.binding.imageView14)
+        holder.binding.root.setOnClickListener {
+            onClick.onCardRecipeClick(currentItem)
+        }
     }
 
     override fun getItemCount(): Int {
         return chat.size
+    }
+
+    interface OnItemClick {
+        fun onCardRecipeClick(chat: Chat)
     }
 
 }
