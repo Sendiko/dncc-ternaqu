@@ -62,4 +62,8 @@
     <string name="setting_label">Pengaturan profil</string>
     <string name="masukan_label">Masukan</string>
     <string name="logout">Logout</string>
+    <string name="last_consul">Konsultasi terakhir</string>
+    <string name="last_consul_sub">Konsultasi dengan ahli ternak terakhir anda</string>
+    <string name="other_nutritionist">Ahli ternak lainnya</string>
+    <string name="other_nutritionist_sub">Pilih ahli ternak untuk berkonsultasi</string>
 </resources>
