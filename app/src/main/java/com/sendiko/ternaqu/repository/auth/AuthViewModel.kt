@@ -6,6 +6,16 @@ import kotlinx.coroutines.launch
 
 class AuthViewModel(private val auth: AuthPreferences) : ViewModel() {
 
+    fun getPremiumStatus(): LiveData<String> {
+        return auth.getPremiumStatus().asLiveData()
+    }
+
+    fun savePremiumStatus(isPremium: String) {
+        viewModelScope.launch {
+            auth.savePremiumStatus(isPremium)
+        }
+    }
+
     fun getUsername(): LiveData<String> {
         return auth.getUsername().asLiveData()
     }

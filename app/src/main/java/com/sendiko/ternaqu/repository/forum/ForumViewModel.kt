@@ -1,7 +1,6 @@
 package com.sendiko.ternaqu.repository.forum
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -12,7 +11,6 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-private const val TAG = "ForumViewModel"
 class ForumViewModel(app: Application) : AndroidViewModel(app) {
 
     private val repo = ForumRepository(app)
@@ -69,7 +67,6 @@ class ForumViewModel(app: Application) : AndroidViewModel(app) {
                 override fun onFailure(call: Call<TopicsResponse>, t: Throwable) {
                     _isFailed.value = FailedMessage(true, "${t.message}")
                     _isLoading.value = false
-                    Log.e(TAG, "onFailure: ${t.message}")
                 }
 
             }
@@ -153,8 +150,7 @@ class ForumViewModel(app: Application) : AndroidViewModel(app) {
 
                 override fun onFailure(call: Call<TopicResponse>, t: Throwable) {
                     _isLoading.value = false
-                    _isFailed.value = FailedMessage(true, "${t.message}")
-                    Log.e(TAG, "onFailure: ${t.message}")
+                    _isFailed.value = FailedMessage(true, "Server error.")
                 }
 
             }

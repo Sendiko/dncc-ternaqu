@@ -1,7 +1,6 @@
 package com.sendiko.ternaqu.repository.recipe
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -12,7 +11,6 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-private const val TAG = "RecipeViewModel"
 class RecipeViewModel(app: Application) : AndroidViewModel(app) {
 
     private val repo = RecipeRepository(app)
@@ -68,8 +66,7 @@ class RecipeViewModel(app: Application) : AndroidViewModel(app) {
 
                 override fun onFailure(call: Call<RecipeResponse>, t: Throwable) {
                     _isLoading.value = false
-                    _isFailed.value = FailedMessage(true, "${t.message}")
-                    Log.e(TAG, "onFailure: ${t.message}")
+                    _isFailed.value = FailedMessage(true, "Server error.")
                 }
             }
 

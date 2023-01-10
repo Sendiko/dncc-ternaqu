@@ -90,7 +90,12 @@ class ProfileFragment : Fragment() {
                 binding.textNameUser.text = user.name
                 binding.textEmail.text = user.email
                 when (user.premium) {
-                    "0" -> binding.button4.text = getString(R.string.go_premium)
+                    "0" -> {
+                        binding.button4.text = getString(R.string.go_premium)
+                        binding.button4.setOnClickListener {
+                            findNavController().navigate(R.id.action_profileFragment_to_upgradeFragment)
+                        }
+                    }
                     "1" -> binding.button4.text = getString(R.string.is_premium)
                 }
             }

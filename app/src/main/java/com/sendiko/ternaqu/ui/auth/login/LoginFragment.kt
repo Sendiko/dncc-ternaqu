@@ -88,6 +88,7 @@ class LoginFragment : Fragment() {
                                     authViewModel.setLoginState(true)
                                     authViewModel.saveUserID(it.id!!)
                                     authViewModel.saveUsername(it.name!!)
+                                    authViewModel.savePremiumStatus(it.premium!!)
                                     startActivity(
                                         Intent(
                                             requireContext(),

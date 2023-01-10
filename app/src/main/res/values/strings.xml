@@ -66,4 +66,8 @@
     <string name="last_consul_sub">Konsultasi dengan ahli ternak terakhir anda</string>
     <string name="other_nutritionist">Ahli ternak lainnya</string>
     <string name="other_nutritionist_sub">Pilih ahli ternak untuk berkonsultasi</string>
+    <string name="join_premium">Bergabung dengan premium</string>
+    <string name="desc_premium">Dapatkan akses fitur Hubungi Ahli Nutrisi, berikan ternakmu pakan yang terbaik untuk pertumbuhan mereka!</string>
+    <string name="desc_benefit_1">Chat Ahli Nutrisi</string>
+    <string name="motivation">Hai, Siap untuk beternak?</string>
 </resources>
