@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit
 
 object NetworkConfig {
 
-    private const val BASE_URL = "http://ternaqu.site/api/"
+    private const val BASE_URL = "http://192.168.18.33:8000/api/"
 
     private fun provideOkHttpClient(): OkHttpClient {
         return OkHttpClient.Builder()

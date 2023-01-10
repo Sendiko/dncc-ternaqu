@@ -12,8 +12,8 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         app:cardBackgroundColor="@color/fadeBlue"
-        app:cardCornerRadius="16dp">
-
+        app:cardCornerRadius="16dp"
+        app:cardElevation="0dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -21,8 +21,8 @@
 
             <ImageView
                 android:id="@+id/imageView14"
-                android:layout_width="64dp"
-                android:layout_height="64dp"
+                android:layout_width="52dp"
+                android:layout_height="52dp"
                 android:layout_margin="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -38,7 +38,7 @@
                 android:layout_marginEnd="16dp"
                 android:fontFamily="@font/poppins_medium"
                 android:text="TextView"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageView14"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -51,7 +51,6 @@
                 android:layout_marginEnd="16dp"
                 android:layout_marginTop="8dp"
                 android:text="TextView"
-                android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="@+id/imageView14"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageView14"

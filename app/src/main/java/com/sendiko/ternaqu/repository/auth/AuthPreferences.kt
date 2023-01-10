@@ -11,6 +11,19 @@ class AuthPreferences private constructor(private val dataStore: DataStore<Prefe
     private val tokenAccess = stringPreferencesKey(name = "token_access")
     private val userIDKey = intPreferencesKey("user_id")
     private val usernameKey = stringPreferencesKey("username")
+    private val isPremiumKey = stringPreferencesKey("is_premium")
+
+    fun getPremiumStatus(): Flow<String> {
+        return dataStore.data.map { key ->
+            key[isPremiumKey] ?: ""
+        }
+    }
+
+    suspend fun savePremiumStatus(isPremium: String) {
+        dataStore.edit { key ->
+            key[isPremiumKey] = isPremium
+        }
+    }
 
     fun getUsername(): Flow<String> {
         return dataStore.data.map { key ->

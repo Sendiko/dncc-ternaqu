@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.sendiko.ternaqu.network.response.ProductItem
 import com.sendiko.ternaqu.network.response.RecipeItem
 import com.sendiko.ternaqu.network.response.TopicsItem
+import com.sendiko.ternaqu.repository.chat.Chat
 
 class SharedViewModel: ViewModel() {
 
@@ -28,6 +29,13 @@ class SharedViewModel: ViewModel() {
 
     fun saveProduct(product: ProductItem){
         _product.value = product
+    }
+
+    private val _chat = MutableLiveData<Chat>()
+    val chat : LiveData<Chat> = _chat
+
+    fun saveChatInfo(chat: Chat){
+        _chat.value = chat
     }
 
 }
