@@ -1,7 +1,6 @@
 package com.sendiko.ternaqu.ui.forum
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,7 +20,6 @@ import com.sendiko.ternaqu.repository.helper.ViewModelFactory
 import com.sendiko.ternaqu.ui.auth.dataStore
 import com.sendiko.ternaqu.ui.loading.LoadingDialogFragment
 
-private const val TAG = "PostTopicFragment"
 class PostTopicFragment : Fragment() {
 
     private lateinit var binding: FragmentPostTopicBinding
@@ -59,7 +57,6 @@ class PostTopicFragment : Fragment() {
             val question = binding.inputQuestion.text.toString()
             authViewModel.getUserID().observe(viewLifecycleOwner) { userId ->
                 authViewModel.getTokenAccess().observe(viewLifecycleOwner) { token ->
-                    Log.i(TAG, "onViewCreated: $token")
                     forumViewModel.postTopic(
                         token, TopicRequest(
                             userId,

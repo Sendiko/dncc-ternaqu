@@ -1,7 +1,6 @@
 package com.sendiko.ternaqu.repository.product
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -13,8 +12,6 @@ import com.sendiko.ternaqu.repository.helper.FailedMessage
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-
-private const val TAG = "ProductViewModel"
 
 class ProductViewModel(app: Application) : AndroidViewModel(app) {
 
@@ -72,8 +69,7 @@ class ProductViewModel(app: Application) : AndroidViewModel(app) {
 
                 override fun onFailure(call: Call<ProductsResponse>, t: Throwable) {
                     _isLoading.value = false
-                    _isFailed.value = FailedMessage(true, "${t.message}")
-                    Log.e(TAG, "onFailure: ${t.message}")
+                    _isFailed.value = FailedMessage(true, "Server error.")
                 }
 
             }
@@ -104,8 +100,7 @@ class ProductViewModel(app: Application) : AndroidViewModel(app) {
 
                 override fun onFailure(call: Call<ProductResponse>, t: Throwable) {
                     _isLoading.value = false
-                    _isFailed.value = FailedMessage(true, "${t.message}")
-                    Log.e(TAG, "onFailure: ${t.message}")
+                    _isFailed.value = FailedMessage(true, "Server error.")
                 }
 
             }
