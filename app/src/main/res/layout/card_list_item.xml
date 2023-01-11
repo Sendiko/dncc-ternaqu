@@ -27,6 +27,7 @@
                 android:layout_height="86dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintDimensionRatio="1:1"
                 tools:srcCompat="@tools:sample/avatars" />
 
             <TextView

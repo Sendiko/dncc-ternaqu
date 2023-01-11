@@ -31,7 +31,7 @@ class ProductAdapter(
         holder.binding.textView7.text = currentItem.title
         Glide.with(context)
             .load(currentItem.imageUrl)
-            .fitCenter()
+            .centerCrop()
             .into(holder.binding.imageView6)
         holder.binding.root.setOnClickListener {
             onItemClick.onCardRecipeClick(currentItem)

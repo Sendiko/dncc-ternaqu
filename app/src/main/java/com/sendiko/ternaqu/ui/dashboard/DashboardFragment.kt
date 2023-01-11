@@ -10,6 +10,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import com.sendiko.ternaqu.R
 import com.sendiko.ternaqu.databinding.FragmentDashboardBinding
 import com.sendiko.ternaqu.network.response.ProductItem
@@ -21,7 +22,9 @@ import com.sendiko.ternaqu.repository.helper.SharedViewModel
 import com.sendiko.ternaqu.repository.helper.ViewModelFactory
 import com.sendiko.ternaqu.repository.product.ProductViewModel
 import com.sendiko.ternaqu.repository.recipe.RecipeViewModel
+import com.sendiko.ternaqu.repository.user.UserViewModel
 import com.sendiko.ternaqu.ui.auth.dataStore
+import com.sendiko.ternaqu.ui.loading.LoadingDialogFragment
 
 class DashboardFragment : Fragment() {
 
@@ -37,6 +40,15 @@ class DashboardFragment : Fragment() {
     private fun obtainProductViewModel(activity: FragmentActivity): ProductViewModel {
         val factory = ViewModelFactory.getInstance(activity.application)
         return ViewModelProvider(this, factory)[ProductViewModel::class.java]
+    }
+
+    private fun obtainUserViewModel(activity: FragmentActivity): UserViewModel {
+        val factory = ViewModelFactory.getInstance(activity.application)
+        return ViewModelProvider(this, factory)[UserViewModel::class.java]
+    }
+
+    private val userViewModel by lazy {
+        obtainUserViewModel(requireNotNull(this.activity))
     }
 
     private val recipeViewModel by lazy {
@@ -86,10 +98,6 @@ class DashboardFragment : Fragment() {
             findNavController().navigate(R.id.action_dashboardFragment_to_productListFragment)
         }
 
-        binding.buttonChatNutritionist.setOnClickListener {
-            findNavController().navigate(R.id.action_dashboardFragment_to_chatListFragment)
-        }
-
         productViewModel.getProducts().observe(viewLifecycleOwner) {
             binding.rvProducts.apply {
                 layoutManager =
@@ -119,6 +127,27 @@ class DashboardFragment : Fragment() {
             }
         }
 
+        binding.buttonChatNutritionist.setOnClickListener {
+            authViewModel.getTokenAccess().observe(viewLifecycleOwner) { token ->
+                userViewModel.getUser(token).observe(viewLifecycleOwner) {
+                    when (it.premium) {
+                        "0" -> findNavController().navigate(R.id.action_dashboardFragment_to_upgradeFragment)
+                        "1" -> findNavController().navigate(R.id.action_dashboardFragment_to_chatListFragment)
+                    }
+                }
+            }
+        }
+
+        userViewModel.isLoading.observe(viewLifecycleOwner) {
+            showLoading(it)
+        }
+
+        userViewModel.isFailed.observe(viewLifecycleOwner) {
+            when {
+                it.isFailed -> showSnackbar(it.failedMessage)
+            }
+        }
+
         recipeViewModel.isLoading.observe(viewLifecycleOwner) {
             when (it) {
                 true -> binding.progressBar7.visibility = View.VISIBLE
@@ -133,6 +162,24 @@ class DashboardFragment : Fragment() {
             }
         }
 
+    }
+
+    private fun showSnackbar(message: String) {
+        Snackbar.make(requireView(), message, Snackbar.LENGTH_LONG).show()
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        var loadingDialogFragment = LoadingDialogFragment()
+        when {
+            isLoading -> {
+                loadingDialogFragment.show(parentFragmentManager)
+            }
+            else -> {
+                loadingDialogFragment =
+                    parentFragmentManager.findFragmentByTag(LoadingDialogFragment().FRAGMENT_TAG) as LoadingDialogFragment
+                loadingDialogFragment.dismiss()
+            }
+        }
     }
 
 }
