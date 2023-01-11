@@ -1,10 +1,12 @@
 package com.sendiko.ternaqu.ui.user
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider
@@ -53,8 +55,16 @@ class ProfileFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
         super.onViewCreated(view, savedInstanceState)
+
+        onBackPressed()
+
+        binding.cardInsight.setOnClickListener {
+            val repoUrl = "https://github.com/Sendiko/dncc-ternaqu/issues"
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.data = Uri.parse(repoUrl)
+            startActivity(intent)
+        }
 
         binding.navBack.setOnClickListener {
             findNavController().navigate(R.id.action_profileFragment_to_dashboardFragment)
@@ -128,6 +138,12 @@ class ProfileFragment : Fragment() {
                     parentFragmentManager.findFragmentByTag(LoadingDialogFragment().FRAGMENT_TAG) as LoadingDialogFragment
                 loadingDialogFragment.dismiss()
             }
+        }
+    }
+
+    private fun onBackPressed() {
+        requireActivity().onBackPressedDispatcher.addCallback(this) {
+            findNavController().navigate(R.id.action_profileFragment_to_dashboardFragment)
         }
     }
 

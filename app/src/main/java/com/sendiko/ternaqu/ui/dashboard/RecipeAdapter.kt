@@ -11,7 +11,7 @@ import com.sendiko.ternaqu.network.response.RecipeItem
 class RecipeAdapter(
     private val recipe: ArrayList<RecipeItem>,
     private val context: Context,
-    private val onItemClick: RecipeAdapter.OnItemClick
+    private val onItemClick: OnItemClick
 ) : RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder>() {
 
     class RecipeViewHolder(
@@ -33,7 +33,7 @@ class RecipeAdapter(
         val currentItem = recipe[position]
         Glide.with(context)
             .load(currentItem.imageUrl)
-            .fitCenter()
+            .centerCrop()
             .into(holder.binding.imageView6)
         holder.binding.textView7.text = currentItem.title
         holder.binding.root.setOnClickListener {

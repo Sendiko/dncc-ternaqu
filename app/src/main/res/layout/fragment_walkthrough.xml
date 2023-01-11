@@ -75,7 +75,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="8dp"
         android:fontFamily="@font/poppins"
-        android:text="@string/loremipsum"
+        android:text="@string/app_quote"
         android:textAlignment="center"
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/button_register"
@@ -83,7 +83,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.5" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_login"
