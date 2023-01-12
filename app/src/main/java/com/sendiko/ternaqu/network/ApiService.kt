@@ -29,6 +29,12 @@ interface ApiService {
         @Header("Authorization") token: String
     ): Call<UserResponse>
 
+    @GET("upgrade/{id}")
+    fun upgradeToPremium(
+        @Path("id") id: String,
+        @Header("Authorization") token: String
+    ): Call<UpgradeResponse>
+
     @GET("recipe")
     fun getRecipe(): Call<RecipeResponse>
 
@@ -37,7 +43,7 @@ interface ApiService {
 
     @GET("product/{id}")
     fun getProduct(
-        @Path("id") id: String
+        @Path("id") id: String,
     ): Call<ProductResponse>
 
     @GET("topics")
