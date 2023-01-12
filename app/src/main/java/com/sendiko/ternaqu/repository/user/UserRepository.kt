@@ -17,4 +17,6 @@ class UserRepository(app: Application) {
 
     fun getUser(token: String) = client.getUser(token)
 
+    fun upgradeToPremium(id: String, token: String) = client.upgradeToPremium(id, token)
+
 }
