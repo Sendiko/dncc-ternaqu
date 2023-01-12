@@ -72,7 +72,7 @@ class ProfileFragment : Fragment() {
 
         binding.cardLogout.setOnClickListener {
             authViewModel.getTokenAccess().observe(viewLifecycleOwner) {
-                userViewModel.postLogout(it).observe(viewLifecycleOwner){ isSuccess ->
+                userViewModel.postLogout(it).observe(viewLifecycleOwner) { isSuccess ->
                     when (isSuccess) {
                         true -> {
                             authViewModel.logoutApp().also {

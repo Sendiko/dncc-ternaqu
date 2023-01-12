@@ -160,4 +160,31 @@ class UserViewModel(app: Application) : AndroidViewModel(app) {
         return isSuccess
     }
 
+    fun upgradeToPremium(id: String, token: String): LiveData<UpgradeResponse> {
+        _isLoading.value = true
+        val isSuccess = MutableLiveData<UpgradeResponse>()
+        val request = repo.upgradeToPremium(id, "Bearer $token")
+        request.enqueue(
+            object : Callback<UpgradeResponse> {
+                override fun onResponse(
+                    call: Call<UpgradeResponse>,
+                    response: Response<UpgradeResponse>
+                ) {
+                    _isLoading.value = false
+                    when(response.code()){
+                        200 -> isSuccess.value = response.body()
+                        else -> _isFailed.value = FailedMessage(true, "Server error.")
+                    }
+                }
+
+                override fun onFailure(call: Call<UpgradeResponse>, t: Throwable) {
+                    _isLoading.value = false
+                    _isFailed.value = FailedMessage(true, "Server error.")
+                }
+
+            }
+        )
+        return isSuccess
+    }
+
 }

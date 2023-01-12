@@ -59,7 +59,7 @@ class ForumViewModel(app: Application) : AndroidViewModel(app) {
                             }
                         }
                         404 -> {
-                            _isFailed.value = FailedMessage(true, "there is no topic")
+                            _isFailed.value = FailedMessage(true, "Be the first one to join!")
                         }
                     }
                 }

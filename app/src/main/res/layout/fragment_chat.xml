@@ -121,20 +121,21 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            style="@style/Widget.MaterialComponents.FloatingActionButton"
             android:id="@+id/floatingActionButton"
+            style="@style/Widget.MaterialComponents.FloatingActionButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:clickable="true"
+            android:layout_marginStart="16dp"
             android:backgroundTint="@color/secondaryBlue"
-            app:tint="@color/whiteBgAlt"
+            android:clickable="true"
+            android:contentDescription="@string/send"
+            android:focusable="true"
             android:src="@drawable/send"
             app:elevation="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:focusable="true"
-            android:contentDescription="@string/send" />
+            app:tint="@color/whiteBgAlt" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
